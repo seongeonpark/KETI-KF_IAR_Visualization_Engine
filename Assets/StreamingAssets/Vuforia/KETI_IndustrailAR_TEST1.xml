@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="2_press-machine" size="3300.000000 3900.000000" />
+    <ImageTarget name="8_brewing-machine" size="674.000000 613.000000" />
+    <ImageTarget name="10_" size="356.000000 354.000000" />
+    <ImageTarget name="9_" size="408.000000 379.000000" />
+    <ImageTarget name="8_" size="266.000000 190.000000" />
+    <ImageTarget name="7_PR1500" size="675.000000 450.000000" />
+    <ImageTarget name="6_Keg-filling" size="800.000000 1075.000000" />
+    <ImageTarget name="5_Drum-filling" size="600.000000 684.000000" />
+    <ImageTarget name="4_Bag-filling" size="525.000000 783.000000" />
+    <ImageTarget name="1_HarsleY28" size="0.092604 0.092604" />
+    <ImageTarget name="3_HX200_temp_scaled" size="0.170127 0.270933" />
+  </Tracking>
+</QCARConfig>
