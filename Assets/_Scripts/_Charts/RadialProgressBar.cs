@@ -8,21 +8,28 @@ public class RadialProgressBar : MonoBehaviour
     #region Inspector_Window_Variables
 
     [Header("Graph Options: ")]
-    [SerializeField] private float _speed = 70f;
+    [SerializeField] private float AnimationSpeed = 70f;
+    [Header("Color")]
+    [SerializeField] private Color Progressbar = new Color(0, 161, 255, 255);
+    [SerializeField] private Color ProgressbarBackground = new Color(190, 190, 190, 255);
+    [SerializeField] private Color Center = new Color(255, 255, 255, 255);
+    [SerializeField] private Color Font = new Color(0, 161, 255, 255);
+
+    [SerializeField] private float VALUE = 13F;
+    [SerializeField] private float _mAmount = 0f;
+    //public GetXML XML;
 
     #endregion  // Inspector_Window_Variables
-    
-    public float VALUE = 13F;
-    public float _mAmount = 0f;
-    //public GetXML XML;
+
 
     #region PRIVATE_VARIABLES
 
-    private Transform mProgressBar;
+    private Image mProgressBar;
+    private Image mBarBackground;
+    private Image mCenterBackground;
     private TextMeshProUGUI mTextIndicator;
     private Text mTextStatus;
     private Text mTextLatency;
-    private Image mRadialImg;
 
     #endregion  // PRIVATE_VARIABLES
 
@@ -32,8 +39,13 @@ public class RadialProgressBar : MonoBehaviour
     {
         //XML = GameObject.Find("RadialProgressBar").GetComponent<GetXML>();
 
-        mProgressBar = gameObject.transform.Find("ProgressBar").transform;
-        mRadialImg = mProgressBar.GetComponent<Image>();
+        mProgressBar = transform.Find("ProgressBar").GetComponent<Image>();
+        mProgressBar.color = Progressbar;
+        mBarBackground = transform.Find("Background").GetComponent<Image>();
+        mBarBackground.color = ProgressbarBackground;
+        mCenterBackground = transform.Find("Center").GetComponent<Image>();
+        mCenterBackground.color = Center;
+
         mTextIndicator = gameObject.transform.Find("Center").Find("Txt_Indicator").GetComponent<TextMeshProUGUI>();
         var tf = gameObject.transform.Find("Indicator");
         mTextStatus = tf.Find("Status").Find("Txt_Status").GetComponent<Text>();
@@ -49,9 +61,9 @@ public class RadialProgressBar : MonoBehaviour
     {
         if (0 <= _mAmount && _mAmount < VALUE)
         {
-            _mAmount += _speed * Time.deltaTime;
+            _mAmount += AnimationSpeed * Time.deltaTime;
 
-            mRadialImg.fillAmount = _mAmount * 0.01f;
+            mProgressBar.fillAmount = _mAmount * 0.01f;
 
             mTextIndicator.text = ((int)_mAmount).ToString() + "%";
         }
