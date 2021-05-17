@@ -473,7 +473,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530e5ba42ca390140af45f3d6e3819fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
 --- !u!1 &17135460
 GameObject:
   m_ObjectHideFlags: 0
@@ -1631,7 +1630,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7419c7881404c341bc9d24ec992f6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
 --- !u!1 &51046554
 GameObject:
   m_ObjectHideFlags: 0
@@ -1683,9 +1681,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 752104815}
 --- !u!114 &51046557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3894,9 +3889,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d155dd0d5f79fc7468abb195f878995f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  VALUE: 13
-  _mAmount: 0
 --- !u!1 &171978117
 GameObject:
   m_ObjectHideFlags: 0
@@ -3913,7 +3905,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &171978118
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3947,7 +3939,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 171978117}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e50f8f5b04813a84ea34e070de9a9a75, type: 3}
+  m_Script: {fileID: 11500000, guid: 76220021b7d4f814dba144a509b8ec43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ReceivedData_1: 0
@@ -4895,15 +4887,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e50f8f5b04813a84ea34e070de9a9a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReceivedData_1: 0
-  ReceivedData_2: 0
-  ReceivedData_3: 0
-  ReceivedData_4: 0
-  _speed: 70
-  FirstBar: {fileID: 0}
-  SecondBar: {fileID: 0}
-  ThirdBar: {fileID: 0}
-  ForthBar: {fileID: 0}
 --- !u!1 &241598717
 GameObject:
   m_ObjectHideFlags: 0
@@ -6076,7 +6059,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530e5ba42ca390140af45f3d6e3819fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
 --- !u!1 &280948820
 GameObject:
   m_ObjectHideFlags: 0
@@ -6148,9 +6130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d155dd0d5f79fc7468abb195f878995f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  VALUE: 13
-  _mAmount: 0
 --- !u!1 &281987476
 GameObject:
   m_ObjectHideFlags: 0
@@ -6380,9 +6359,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d155dd0d5f79fc7468abb195f878995f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  VALUE: 13
-  _mAmount: 0
 --- !u!1 &285668904
 GameObject:
   m_ObjectHideFlags: 0
@@ -6632,34 +6608,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ca47f16f4e5ca44784b443358f21b0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  XML: {fileID: 296772589}
-  Sensors:
-  - name: Temperature
-    min: 0
-    max: 1
-  - name: Noise
-    min: 0
-    max: 1
-  - name: Light
-    min: 0
-    max: 100
-  BarMaterials:
-  - {fileID: 2100000, guid: 0c9695c4cb1e93043a0ad6ff29cdcdee, type: 2}
-  - {fileID: 2100000, guid: 7d02b5dc23182c94e832da4876db4a60, type: 2}
-  - {fileID: 2100000, guid: 60413097786326349be02932edb8844a, type: 2}
-  - {fileID: 2100000, guid: 45341c52ac895bf48b8fcd579c9f3759, type: 2}
-  - {fileID: 2100000, guid: ca3647e8d96116c4e920bf8de1eb3354, type: 2}
-  - {fileID: 2100000, guid: 14b740b45e23f3643a8914983d0ea959, type: 2}
-  - {fileID: 2100000, guid: 6ba860cd2f39c4d4a80d6eaff1f6a8b6, type: 2}
-  - {fileID: 2100000, guid: ab38e048bc893254cac186be6cd3b715, type: 2}
-  BarOutlineMaterial: {fileID: 2100000, guid: 1bd59e08e1487b548a5f8b5d6675fb72, type: 2}
-  FontSize: 200
-  Distance: 130
-  Margin: 10
-  FontAsset: {fileID: 11400000, guid: d2cb7eee3972a3b45bcbbb06fe302ba4, type: 2}
-  FontColor: {r: 255, g: 255, b: 255, a: 255}
-  LabellineWidth: 0.001
-  CHART_WIDTH: 250
 --- !u!114 &296772589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7075,7 +7023,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ec70a1cc3c14d4682a781673614af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 100
 --- !u!1 &320872108
 GameObject:
   m_ObjectHideFlags: 0
@@ -7455,9 +7402,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 1199782492}
 --- !u!114 &331899098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7887,9 +7831,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 463449729}
 --- !u!114 &352878535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8107,27 +8048,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38b808d46e6a12445a74334108af6bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Labels:
-  - Name: machine a
-    Sprite: {fileID: 21300000, guid: 8579562ad164d42268a27a3875dd529d, type: 3}
-    Color: {r: 0, g: 0.9338684, b: 1, a: 0.019607844}
-  - Name: machine b
-    Sprite: {fileID: 21300000, guid: 8579562ad164d42268a27a3875dd529d, type: 3}
-    Color: {r: 0.9150943, g: 0, b: 0, a: 0.019607844}
-  Size: 12
-  DelayTime: 1
-  XAxis:
-    Name: noise
-    Min: 0
-    Max: 10
-  YAxis:
-    Name: temperature
-    Min: -10
-    Max: 50
-  FontSize: 200
-  Location: 10
-  FontColor: {r: 255, g: 255, b: 255, a: 255}
-  FontAsset: {fileID: 11400000, guid: d2cb7eee3972a3b45bcbbb06fe302ba4, type: 2}
 --- !u!1 &366517861
 GameObject:
   m_ObjectHideFlags: 0
@@ -10697,15 +10617,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e50f8f5b04813a84ea34e070de9a9a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReceivedData_1: 0
-  ReceivedData_2: 0
-  ReceivedData_3: 0
-  ReceivedData_4: 0
-  _speed: 70
-  FirstBar: {fileID: 0}
-  SecondBar: {fileID: 0}
-  ThirdBar: {fileID: 0}
-  ForthBar: {fileID: 0}
 --- !u!1 &450216833
 GameObject:
   m_ObjectHideFlags: 0
@@ -11490,9 +11401,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 491858719}
 --- !u!114 &465232483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12360,7 +12268,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530e5ba42ca390140af45f3d6e3819fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
 --- !u!1 &491424028
 GameObject:
   m_ObjectHideFlags: 0
@@ -13408,27 +13315,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38b808d46e6a12445a74334108af6bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Labels:
-  - Name: machine a
-    Sprite: {fileID: 21300000, guid: 8579562ad164d42268a27a3875dd529d, type: 3}
-    Color: {r: 0, g: 0.9338684, b: 1, a: 0.019607844}
-  - Name: machine b
-    Sprite: {fileID: 21300000, guid: 8579562ad164d42268a27a3875dd529d, type: 3}
-    Color: {r: 0.9150943, g: 0, b: 0, a: 0.019607844}
-  Size: 12
-  DelayTime: 1
-  XAxis:
-    Name: noise
-    Min: 0
-    Max: 10
-  YAxis:
-    Name: temperature
-    Min: -10
-    Max: 50
-  FontSize: 200
-  Location: 10
-  FontColor: {r: 255, g: 255, b: 255, a: 255}
-  FontAsset: {fileID: 11400000, guid: d2cb7eee3972a3b45bcbbb06fe302ba4, type: 2}
 --- !u!1 &506032968
 GameObject:
   m_ObjectHideFlags: 0
@@ -13931,7 +13817,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530e5ba42ca390140af45f3d6e3819fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
 --- !u!1 &515430525
 GameObject:
   m_ObjectHideFlags: 0
@@ -14737,9 +14622,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 227929598}
 --- !u!114 &532061960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14904,9 +14786,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 948937901}
 --- !u!114 &533450349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15570,9 +15449,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 2097711413}
 --- !u!114 &569719822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16449,15 +16325,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e50f8f5b04813a84ea34e070de9a9a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReceivedData_1: 0
-  ReceivedData_2: 0
-  ReceivedData_3: 0
-  ReceivedData_4: 0
-  _speed: 70
-  FirstBar: {fileID: 0}
-  SecondBar: {fileID: 0}
-  ThirdBar: {fileID: 0}
-  ForthBar: {fileID: 0}
 --- !u!1 &584057414
 GameObject:
   m_ObjectHideFlags: 0
@@ -16567,7 +16434,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7419c7881404c341bc9d24ec992f6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
 --- !u!1 &592408233
 GameObject:
   m_ObjectHideFlags: 0
@@ -17160,9 +17026,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d155dd0d5f79fc7468abb195f878995f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  VALUE: 13
-  _mAmount: 0
 --- !u!1 &622429605
 GameObject:
   m_ObjectHideFlags: 0
@@ -17687,9 +17550,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 1763760883}
 --- !u!114 &629234990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18079,25 +17939,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5502a4968ee0e346bbc30fe522a1c4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  XML: {fileID: 652457073}
-  Sensors: []
-  HasBackgroundMesh: 0
-  BackgroundMeshMaterial: {fileID: 2100000, guid: 511f98b02465ac945b0a746f5ca78111,
-    type: 2}
-  BackgroundGridCount: 3
-  HasAxis: 1
-  BackgroundLineMaterial: {fileID: 2100000, guid: 1d20ff96d39012e49b213a70b8015ade,
-    type: 2}
-  AxisThickness: 0.005
-  HasChartMesh: 1
-  radarMaterial: {fileID: 2100000, guid: 7b227fc00de1e06418f963eb0f29a84f, type: 2}
-  HasChartLine: 1
-  RadarLineMaterial: {fileID: 2100000, guid: 58d4643a18dfb5344b0ddb40dc17c3bf, type: 2}
-  RadarLineThickness: 0.005
-  FontSize: 250
-  Location: 1.2
-  FontColor: {r: 255, g: 255, b: 255, a: 255}
-  FontAsset: {fileID: 11400000, guid: d2cb7eee3972a3b45bcbbb06fe302ba4, type: 2}
 --- !u!114 &652457073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18177,15 +18018,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e50f8f5b04813a84ea34e070de9a9a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReceivedData_1: 0
-  ReceivedData_2: 0
-  ReceivedData_3: 0
-  ReceivedData_4: 0
-  _speed: 70
-  FirstBar: {fileID: 0}
-  SecondBar: {fileID: 0}
-  ThirdBar: {fileID: 0}
-  ForthBar: {fileID: 0}
 --- !u!1 &659514397
 GameObject:
   m_ObjectHideFlags: 0
@@ -20843,7 +20675,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ec70a1cc3c14d4682a781673614af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 100
 --- !u!1 &733155936
 GameObject:
   m_ObjectHideFlags: 0
@@ -22331,7 +22162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7419c7881404c341bc9d24ec992f6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
 --- !u!1 &793907155
 GameObject:
   m_ObjectHideFlags: 0
@@ -22900,9 +22730,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 1453017817}
 --- !u!114 &803138518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24050,7 +23877,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530e5ba42ca390140af45f3d6e3819fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
 --- !u!1 &841410022
 GameObject:
   m_ObjectHideFlags: 0
@@ -24255,9 +24081,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 630609042}
 --- !u!114 &845152733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24643,7 +24466,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ec70a1cc3c14d4682a781673614af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 100
 --- !u!1 &868645485
 GameObject:
   m_ObjectHideFlags: 0
@@ -24714,7 +24536,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530e5ba42ca390140af45f3d6e3819fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
 --- !u!1 &870315449
 GameObject:
   m_ObjectHideFlags: 0
@@ -26869,25 +26690,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5502a4968ee0e346bbc30fe522a1c4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  XML: {fileID: 961690942}
-  Sensors: []
-  HasBackgroundMesh: 0
-  BackgroundMeshMaterial: {fileID: 2100000, guid: 511f98b02465ac945b0a746f5ca78111,
-    type: 2}
-  BackgroundGridCount: 3
-  HasAxis: 1
-  BackgroundLineMaterial: {fileID: 2100000, guid: 1d20ff96d39012e49b213a70b8015ade,
-    type: 2}
-  AxisThickness: 0.005
-  HasChartMesh: 1
-  radarMaterial: {fileID: 2100000, guid: 7b227fc00de1e06418f963eb0f29a84f, type: 2}
-  HasChartLine: 1
-  RadarLineMaterial: {fileID: 2100000, guid: 58d4643a18dfb5344b0ddb40dc17c3bf, type: 2}
-  RadarLineThickness: 0.005
-  FontSize: 250
-  Location: 1.2
-  FontColor: {r: 255, g: 255, b: 255, a: 255}
-  FontAsset: {fileID: 11400000, guid: d2cb7eee3972a3b45bcbbb06fe302ba4, type: 2}
 --- !u!1 &964037368
 GameObject:
   m_ObjectHideFlags: 0
@@ -27065,9 +26867,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 1429163135}
 --- !u!114 &964459166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27491,7 +27290,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ec70a1cc3c14d4682a781673614af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 100
 --- !u!1 &1003456749
 GameObject:
   m_ObjectHideFlags: 0
@@ -29064,9 +28862,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 174233786}
 --- !u!114 &1039213805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29363,9 +29158,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 167054636}
 --- !u!114 &1053841201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30940,9 +30732,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 1325863238}
 --- !u!114 &1108273096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32501,9 +32290,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 257208468}
 --- !u!114 &1166116339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32917,9 +32703,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 1561640301}
 --- !u!114 &1183731512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32989,9 +32772,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 942754956}
 --- !u!114 &1183816751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33061,9 +32841,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 1916482681}
 --- !u!114 &1187604598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35000,9 +34777,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 1823204641}
 --- !u!114 &1274130923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35397,7 +35171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7419c7881404c341bc9d24ec992f6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
 --- !u!1 &1280137793
 GameObject:
   m_ObjectHideFlags: 0
@@ -36623,9 +36396,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 579376052}
 --- !u!114 &1332503281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37231,7 +37001,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1352886701
 RectTransform:
   m_ObjectHideFlags: 0
@@ -37281,10 +37051,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1352886700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2ec70a1cc3c14d4682a781673614af0, type: 3}
+  m_Script: {fileID: 11500000, guid: 76220021b7d4f814dba144a509b8ec43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 100
+  ReceivedData_1: 0
+  ReceivedData_2: 0
+  ReceivedData_3: 0
+  ReceivedData_4: 0
+  _speed: 70
+  FirstBar: {fileID: 0}
+  SecondBar: {fileID: 0}
+  ThirdBar: {fileID: 0}
+  ForthBar: {fileID: 0}
 --- !u!1 &1354573563
 GameObject:
   m_ObjectHideFlags: 0
@@ -37737,7 +37515,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ec70a1cc3c14d4682a781673614af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 100
 --- !u!1 &1362636831
 GameObject:
   m_ObjectHideFlags: 0
@@ -37993,7 +37770,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7419c7881404c341bc9d24ec992f6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
 --- !u!1 &1368672934
 GameObject:
   m_ObjectHideFlags: 0
@@ -39203,15 +38979,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e50f8f5b04813a84ea34e070de9a9a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReceivedData_1: 0
-  ReceivedData_2: 0
-  ReceivedData_3: 0
-  ReceivedData_4: 0
-  _speed: 70
-  FirstBar: {fileID: 0}
-  SecondBar: {fileID: 0}
-  ThirdBar: {fileID: 0}
-  ForthBar: {fileID: 0}
 --- !u!1 &1412656182
 GameObject:
   m_ObjectHideFlags: 0
@@ -39302,25 +39069,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ca47f16f4e5ca44784b443358f21b0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  XML: {fileID: 0}
-  Sensors: []
-  BarMaterials:
-  - {fileID: 2100000, guid: 0c9695c4cb1e93043a0ad6ff29cdcdee, type: 2}
-  - {fileID: 2100000, guid: 7d02b5dc23182c94e832da4876db4a60, type: 2}
-  - {fileID: 2100000, guid: 60413097786326349be02932edb8844a, type: 2}
-  - {fileID: 2100000, guid: 45341c52ac895bf48b8fcd579c9f3759, type: 2}
-  - {fileID: 2100000, guid: ca3647e8d96116c4e920bf8de1eb3354, type: 2}
-  - {fileID: 2100000, guid: 14b740b45e23f3643a8914983d0ea959, type: 2}
-  - {fileID: 2100000, guid: 6ba860cd2f39c4d4a80d6eaff1f6a8b6, type: 2}
-  - {fileID: 2100000, guid: ab38e048bc893254cac186be6cd3b715, type: 2}
-  BarOutlineMaterial: {fileID: 2100000, guid: 1bd59e08e1487b548a5f8b5d6675fb72, type: 2}
-  FontSize: 100
-  Distance: 130
-  Margin: 10
-  FontAsset: {fileID: 11400000, guid: d2cb7eee3972a3b45bcbbb06fe302ba4, type: 2}
-  FontColor: {r: 255, g: 255, b: 255, a: 255}
-  LabellineWidth: 0.001
-  CHART_WIDTH: 250
 --- !u!1 &1415059160
 GameObject:
   m_ObjectHideFlags: 0
@@ -40769,9 +40517,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 1733547592}
 --- !u!114 &1440846599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43194,9 +42939,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d155dd0d5f79fc7468abb195f878995f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  VALUE: 13
-  _mAmount: 0
 --- !u!1 &1548752159
 GameObject:
   m_ObjectHideFlags: 0
@@ -45179,7 +44921,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530e5ba42ca390140af45f3d6e3819fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
 --- !u!1 &1614592286
 GameObject:
   m_ObjectHideFlags: 0
@@ -45321,9 +45062,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 1682817256}
 --- !u!114 &1624857058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45801,15 +45539,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e50f8f5b04813a84ea34e070de9a9a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReceivedData_1: 0
-  ReceivedData_2: 0
-  ReceivedData_3: 0
-  ReceivedData_4: 0
-  _speed: 70
-  FirstBar: {fileID: 0}
-  SecondBar: {fileID: 0}
-  ThirdBar: {fileID: 0}
-  ForthBar: {fileID: 0}
 --- !u!1 &1631446235
 GameObject:
   m_ObjectHideFlags: 0
@@ -47267,7 +46996,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7419c7881404c341bc9d24ec992f6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
 --- !u!1 &1697887584
 GameObject:
   m_ObjectHideFlags: 0
@@ -50730,9 +50458,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1817776020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
+  m_Script: {fileID: 11500000, guid: 045d9b4ac99085c46890b1ff7088545c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Speed: 0
+  BarColor: {r: 0, g: 0, b: 0, a: 0}
+  BarBackgroundColor: {r: 0, g: 0, b: 0, a: 0}
+  FontColor: {r: 0, g: 0, b: 0, a: 0}
   _speed: 70
   value: 10
   ProgressBar: {fileID: 559670842}
@@ -51787,9 +51519,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d155dd0d5f79fc7468abb195f878995f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  VALUE: 13
-  _mAmount: 0
 --- !u!1 &1857896883
 GameObject:
   m_ObjectHideFlags: 0
@@ -52551,27 +52280,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38b808d46e6a12445a74334108af6bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Labels:
-  - Name: machine a
-    Sprite: {fileID: 21300000, guid: 8579562ad164d42268a27a3875dd529d, type: 3}
-    Color: {r: 0, g: 0.9338684, b: 1, a: 0.019607844}
-  - Name: machine b
-    Sprite: {fileID: 21300000, guid: 8579562ad164d42268a27a3875dd529d, type: 3}
-    Color: {r: 0.9150943, g: 0, b: 0, a: 0.019607844}
-  Size: 12
-  DelayTime: 1
-  XAxis:
-    Name: noise
-    Min: 0
-    Max: 10
-  YAxis:
-    Name: temperature
-    Min: -10
-    Max: 50
-  FontSize: 200
-  Location: 10
-  FontColor: {r: 255, g: 255, b: 255, a: 255}
-  FontAsset: {fileID: 11400000, guid: d2cb7eee3972a3b45bcbbb06fe302ba4, type: 2}
 --- !u!1 &1880220298
 GameObject:
   m_ObjectHideFlags: 0
@@ -52647,24 +52355,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21aeabdbf1215564ab1256168fdd1801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Labels:
-  - Name: Machine A
-    Sprite: {fileID: 21300000, guid: 1ebe6517b59404f46943d79f7e2e004c, type: 3}
-    Color: {r: 0.5149412, g: 1, b: 0.16509432, a: 0.5882353}
-  DelayTime: 3
-  XAxis:
-    Name: Temperature
-    Min: -50
-    Max: 50
-  YAxis:
-    Name: Noise
-    Min: 0
-    Max: 200
-  FontSize: 250
-  Location: 1.2
-  FontColor: {r: 255, g: 255, b: 255, a: 255}
-  FontAsset: {fileID: 11400000, guid: d2cb7eee3972a3b45bcbbb06fe302ba4, type: 2}
-  GridCount: 5
 --- !u!114 &1880220302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54181,9 +53871,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 414937638}
 --- !u!114 &1920782251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54430,7 +54117,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7419c7881404c341bc9d24ec992f6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
 --- !u!1 &1935668291
 GameObject:
   m_ObjectHideFlags: 0
@@ -54741,9 +54427,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 1566837829}
 --- !u!114 &1941196343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55536,9 +55219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 368323856}
 --- !u!114 &1978302320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56168,7 +55848,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ec70a1cc3c14d4682a781673614af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 100
 --- !u!1 &1993618639
 GameObject:
   m_ObjectHideFlags: 0
@@ -56742,9 +56421,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 1641473689}
 --- !u!114 &2015093556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57315,21 +56991,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f841d2feefcacc4e9d163d450be3d22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  XML: {fileID: 0}
-  WedgePrefab: {fileID: 3205642607751958558, guid: 0d3425c0a6ba7ae4a9162461af69b0ba,
-    type: 3}
-  Margin: 0.003
-  Sensors: []
-  WedgeColors:
-  - {r: 0.61089355, g: 0.87558216, b: 0.9056604, a: 1}
-  - {r: 0.6392157, g: 0.90588236, b: 0.6472995, a: 1}
-  - {r: 0.9493759, g: 0.9716981, b: 0.62793696, a: 1}
-  - {r: 1, g: 0.7904301, b: 0.7216981, a: 1}
-  - {r: 1, g: 0.6556604, b: 0.94680923, a: 1}
-  FontSize: 350
-  Distance: 350
-  FontAsset: {fileID: 11400000, guid: d2cb7eee3972a3b45bcbbb06fe302ba4, type: 2}
-  Padding: 50
 --- !u!1 &2045311944
 GameObject:
   m_ObjectHideFlags: 0
@@ -59125,9 +58786,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationSpeed: 70
-  Progressbar: {r: 254.99994, g: 30.965343, b: 0, a: 255}
-  ProgressbarBackground: {r: 190, g: 190, b: 190, a: 255}
-  Center: {r: 255, g: 255, b: 255, a: 255}
+  Progressbar: {r: 0, g: 254.99994, b: 233.0339, a: 255}
+  ProgressbarBackground: {r: 140.45168, g: 140.45168, b: 140.45168, a: 1}
+  Center: {r: 555.2985, g: 555.2985, b: 555.2985, a: 1}
   Font: {r: 0, g: 161, b: 255, a: 255}
   VALUE: 13
   _mAmount: 0
@@ -59272,9 +58933,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 99211104}
 --- !u!114 &2103333446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59787,7 +59445,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ec70a1cc3c14d4682a781673614af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 100
 --- !u!114 &2101739826116482824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59800,9 +59457,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 2101739826656672875}
 --- !u!224 &2101739826116482825
 RectTransform:
   m_ObjectHideFlags: 0
@@ -61144,9 +60798,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d155dd0d5f79fc7468abb195f878995f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  VALUE: 13
-  _mAmount: 0
 --- !u!222 &2101739826477257106
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -61342,9 +60993,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 2101739827194602398}
 --- !u!224 &2101739826512065694
 RectTransform:
   m_ObjectHideFlags: 0
@@ -61453,9 +61101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 2101739827116348674}
 --- !u!1 &2101739826656672868
 GameObject:
   m_ObjectHideFlags: 0
@@ -61791,7 +61436,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7419c7881404c341bc9d24ec992f6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
 --- !u!114 &2101739826685470179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62775,7 +62419,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530e5ba42ca390140af45f3d6e3819fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
 --- !u!222 &2101739827078800019
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -65835,9 +65478,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 2101739826499134544}
 --- !u!224 &2101739827862917483
 RectTransform:
   m_ObjectHideFlags: 0
@@ -66255,15 +65895,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e50f8f5b04813a84ea34e070de9a9a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReceivedData_1: 0
-  ReceivedData_2: 0
-  ReceivedData_3: 0
-  ReceivedData_4: 0
-  _speed: 70
-  FirstBar: {fileID: 0}
-  SecondBar: {fileID: 0}
-  ThirdBar: {fileID: 0}
-  ForthBar: {fileID: 0}
 --- !u!224 &2101739827970451373
 RectTransform:
   m_ObjectHideFlags: 0
@@ -68986,9 +68617,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 2269277462994488601}
 --- !u!224 &2269277462336402259
 RectTransform:
   m_ObjectHideFlags: 0
@@ -69373,9 +69001,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 2269277463562160291}
 --- !u!224 &2269277462392079582
 RectTransform:
   m_ObjectHideFlags: 0
@@ -69780,7 +69405,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7419c7881404c341bc9d24ec992f6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 40
 --- !u!224 &2269277462454628714
 RectTransform:
   m_ObjectHideFlags: 0
@@ -69850,9 +69474,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 2269277462390717525}
 --- !u!224 &2269277462493700376
 RectTransform:
   m_ObjectHideFlags: 0
@@ -70555,7 +70176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530e5ba42ca390140af45f3d6e3819fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 40
 --- !u!222 &2269277462691052488
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -72790,9 +72410,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 2269277462353172894}
 --- !u!224 &2269277463151140050
 RectTransform:
   m_ObjectHideFlags: 0
@@ -72846,9 +72463,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d155dd0d5f79fc7468abb195f878995f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  VALUE: 13
-  _mAmount: 0
 --- !u!114 &2269277463151140053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73105,7 +72719,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ec70a1cc3c14d4682a781673614af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 100
 --- !u!114 &2269277463232474329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73328,15 +72941,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e50f8f5b04813a84ea34e070de9a9a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReceivedData_1: 0
-  ReceivedData_2: 0
-  ReceivedData_3: 0
-  ReceivedData_4: 0
-  _speed: 70
-  FirstBar: {fileID: 2269277462392079583}
-  SecondBar: {fileID: 2269277462454628715}
-  ThirdBar: {fileID: 2269277462336402256}
-  ForthBar: {fileID: 2269277463129774507}
 --- !u!1 &2269277463282657844
 GameObject:
   m_ObjectHideFlags: 0
@@ -74579,7 +74183,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7419c7881404c341bc9d24ec992f6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
 --- !u!114 &6356727620929863647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74900,9 +74503,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d155dd0d5f79fc7468abb195f878995f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  VALUE: 13
-  _mAmount: 0
 --- !u!1 &6356727620951287548
 GameObject:
   m_ObjectHideFlags: 0
@@ -75258,9 +74858,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 6356727621490122182}
 --- !u!1 &6356727621120600150
 GameObject:
   m_ObjectHideFlags: 0
@@ -77808,7 +77405,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530e5ba42ca390140af45f3d6e3819fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
 --- !u!114 &6356727621615325321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78663,9 +78259,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 6356727622783367196}
 --- !u!224 &6356727621802286979
 RectTransform:
   m_ObjectHideFlags: 0
@@ -79085,9 +78678,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 6356727622803962139}
 --- !u!224 &6356727621913997137
 RectTransform:
   m_ObjectHideFlags: 0
@@ -79322,7 +78912,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ec70a1cc3c14d4682a781673614af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 100
 --- !u!114 &6356727621949286511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79923,15 +79512,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e50f8f5b04813a84ea34e070de9a9a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReceivedData_1: 0
-  ReceivedData_2: 0
-  ReceivedData_3: 0
-  ReceivedData_4: 0
-  _speed: 70
-  FirstBar: {fileID: 0}
-  SecondBar: {fileID: 0}
-  ThirdBar: {fileID: 0}
-  ForthBar: {fileID: 0}
 --- !u!224 &6356727622358487989
 RectTransform:
   m_ObjectHideFlags: 0
@@ -81086,9 +80666,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9605fd1d3057e43b8288057bd596ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
-  value: 10
-  ProgressBar: {fileID: 6356727621271319494}
 --- !u!224 &6356727622772184382
 RectTransform:
   m_ObjectHideFlags: 0

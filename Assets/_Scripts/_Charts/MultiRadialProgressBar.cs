@@ -2,8 +2,16 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+[SerializeField]
+public class SingleProgressBar
+{
+    
+}
+
 public class MultiRadialProgressBar : MonoBehaviour
 {
+    public MRPBChild[] bars = new MRPBChild[4];
+
     [Header("Input Options: ")]
     [SerializeField] private float ReceivedData_1;
     [SerializeField] private float ReceivedData_2;
@@ -29,6 +37,9 @@ public class MultiRadialProgressBar : MonoBehaviour
     private TextMeshProUGUI Txt_Indicator_2nd;
     private TextMeshProUGUI Txt_Indicator_3rd;
     private TextMeshProUGUI Txt_Indicator_4th;
+
+
+    #region UNITY_MONOBEHAVIOUR_METHODS
 
     private void Start()
     {
@@ -91,6 +102,9 @@ public class MultiRadialProgressBar : MonoBehaviour
         }
     }
 
+    #endregion  // UNITY_MONOBEHAVIOUR_METHODS
+
+    #region PRIVATE_METHODS
 
     private void ResetData()
     {
@@ -99,4 +113,6 @@ public class MultiRadialProgressBar : MonoBehaviour
         amount_3rd = 0.0f;
         amount_4th = 0.0f;
     }
+
+    #endregion  // PRIVATE_METHODS
 }

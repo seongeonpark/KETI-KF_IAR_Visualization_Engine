@@ -1,26 +1,38 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[Serializable]
 public class MRPBChild : MonoBehaviour
 {
     #region Inspetor Opions
+    public float Speed;
+    public Color BarColor;
+    public Color BarBackgroundColor;
+    public Color FontColor;
+
     [Header("Graph Options: ")]
     [SerializeField] private float _speed = 70f;
     #endregion
 
     public float value = 10f;
-    private TextMeshProUGUI TextIndicator;
+    private TextMeshProUGUI mTextIndicator;
     
     private float _mAmount = 0f;
 
     //public GetXML XML;
     public Transform ProgressBar;
+    private Image mBar;
+
+
+    #region UNITY_MONOBEHAVIOUR_METHODS
 
     private void Awake()
     {
-        TextIndicator = gameObject.transform.Find("ProgressBar").Find("Txt_Indicator").GetComponent<TextMeshProUGUI>();
+        mBar = transform.Find("ProgressBar").GetComponent<Image>();
+        mTextIndicator = transform.Find("ProgressBar").Find("Txt_Indicator").GetComponent<TextMeshProUGUI>();
     }
 
     private void Start()
@@ -30,19 +42,23 @@ public class MRPBChild : MonoBehaviour
 
     void Update()
     {
-        if (ProgressBar)
+        if (mBar)
         {
             if (0 <= _mAmount && _mAmount < value)
             {
                 _mAmount += _speed * Time.deltaTime;
 
                 float norm = NormalizeGraph(_mAmount);
-                ProgressBar.GetComponent<Image>().fillAmount = norm * 0.01f;
+                mBar.fillAmount = norm * 0.01f;
 
-                TextIndicator.text = ((int)_mAmount).ToString() + "%";
+                mTextIndicator.text = ((int)_mAmount).ToString() + "%";
             }
         }
     }
+
+    #endregion  // UNITY_MONOBEHAVIOUR_METHODS
+
+    #region PRIVATE_METHODS
 
     private IEnumerator UpdateGraph()
     {
@@ -58,4 +74,6 @@ public class MRPBChild : MonoBehaviour
     {
         return 75 * (value * 0.01f);
     }
+    
+    #endregion  // PRIVATE_METHODS
 }
