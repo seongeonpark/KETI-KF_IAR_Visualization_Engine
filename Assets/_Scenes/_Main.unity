@@ -3942,6 +3942,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76220021b7d4f814dba144a509b8ec43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bars:
+  - {fileID: 1817776022}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   ReceivedData_1: 0
   ReceivedData_2: 0
   ReceivedData_3: 0
@@ -37054,6 +37059,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76220021b7d4f814dba144a509b8ec43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bars:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   ReceivedData_1: 0
   ReceivedData_2: 0
   ReceivedData_3: 0

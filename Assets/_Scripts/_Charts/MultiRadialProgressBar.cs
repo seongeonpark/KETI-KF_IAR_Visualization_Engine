@@ -1,16 +1,21 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[SerializeField]
-public class SingleProgressBar
+[Serializable]
+public class RadialBarProperties
 {
-    
+    public float Speed;
+    public Color BarColor;
+    public Color BarBackgroundColor;
+    public Color FontColor;
+
 }
 
 public class MultiRadialProgressBar : MonoBehaviour
 {
-    public MRPBChild[] bars = new MRPBChild[4];
+    public RadialBarProperties[] bars = new RadialBarProperties[4];
 
     [Header("Input Options: ")]
     [SerializeField] private float ReceivedData_1;
