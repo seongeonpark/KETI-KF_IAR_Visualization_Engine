@@ -1,9 +1,22 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[Serializable]
+public class RadialBarProperties
+{
+    public float Speed;
+    public Color BarColor;
+    public Color BarBackgroundColor;
+    public Color FontColor;
+
+}
+
 public class MultiRadialProgressBar : MonoBehaviour
 {
+    public RadialBarProperties[] bars = new RadialBarProperties[4];
+
     [Header("Input Options: ")]
     [SerializeField] private float ReceivedData_1;
     [SerializeField] private float ReceivedData_2;
@@ -29,6 +42,9 @@ public class MultiRadialProgressBar : MonoBehaviour
     private TextMeshProUGUI Txt_Indicator_2nd;
     private TextMeshProUGUI Txt_Indicator_3rd;
     private TextMeshProUGUI Txt_Indicator_4th;
+
+
+    #region UNITY_MONOBEHAVIOUR_METHODS
 
     private void Start()
     {
@@ -91,6 +107,9 @@ public class MultiRadialProgressBar : MonoBehaviour
         }
     }
 
+    #endregion  // UNITY_MONOBEHAVIOUR_METHODS
+
+    #region PRIVATE_METHODS
 
     private void ResetData()
     {
@@ -99,4 +118,6 @@ public class MultiRadialProgressBar : MonoBehaviour
         amount_3rd = 0.0f;
         amount_4th = 0.0f;
     }
+
+    #endregion  // PRIVATE_METHODS
 }
