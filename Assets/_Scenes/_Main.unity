@@ -3943,10 +3943,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bars:
-  - {fileID: 1817776022}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - Speed: 0
+    BarColor: {r: 0, g: 0, b: 0, a: 0}
+    BarBackgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    FontColor: {r: 0, g: 0, b: 0, a: 0}
+  - Speed: 0
+    BarColor: {r: 0, g: 0, b: 0, a: 0}
+    BarBackgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    FontColor: {r: 0, g: 0, b: 0, a: 0}
+  - Speed: 0
+    BarColor: {r: 0, g: 0, b: 0, a: 0}
+    BarBackgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    FontColor: {r: 0, g: 0, b: 0, a: 0}
+  - Speed: 0
+    BarColor: {r: 0, g: 0, b: 0, a: 0}
+    BarBackgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    FontColor: {r: 0, g: 0, b: 0, a: 0}
   ReceivedData_1: 0
   ReceivedData_2: 0
   ReceivedData_3: 0
@@ -4272,6 +4284,34 @@ Transform:
   m_Father: {fileID: 1225464659}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!21 &210063585
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: '1_HarsleY28Material
+
+    54004'
+  m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: c08c8a9280e94c22984eafc84403d92d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats: []
+    m_Colors:
+    - _Color: {r: 0.82089555, g: 0.82089555, b: 0.82089555, a: 1}
 --- !u!1 &210430966
 GameObject:
   m_ObjectHideFlags: 0
@@ -11255,34 +11295,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 825e61745760dbe4ebcfecdc07f02cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!21 &464162388
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: '1_HarsleY28Material
-
-    18040'
-  m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: c08c8a9280e94c22984eafc84403d92d, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats: []
-    m_Colors:
-    - _Color: {r: 0.82089555, g: 0.82089555, b: 0.82089555, a: 1}
 --- !u!1 &464255916
 GameObject:
   m_ObjectHideFlags: 0
@@ -37060,10 +37072,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bars:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - Speed: 0
+    BarColor: {r: 0, g: 0, b: 0, a: 0}
+    BarBackgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    FontColor: {r: 0, g: 0, b: 0, a: 0}
+  - Speed: 0
+    BarColor: {r: 0, g: 0, b: 0, a: 0}
+    BarBackgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    FontColor: {r: 0, g: 0, b: 0, a: 0}
+  - Speed: 0
+    BarColor: {r: 0, g: 0, b: 0, a: 0}
+    BarBackgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    FontColor: {r: 0, g: 0, b: 0, a: 0}
+  - Speed: 0
+    BarColor: {r: 0, g: 0, b: 0, a: 0}
+    BarBackgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    FontColor: {r: 0, g: 0, b: 0, a: 0}
   ReceivedData_1: 0
   ReceivedData_2: 0
   ReceivedData_3: 0
@@ -66063,7 +66087,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 464162388}
+  - {fileID: 210063585}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
