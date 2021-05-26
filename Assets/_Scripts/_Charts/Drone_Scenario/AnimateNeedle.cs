@@ -20,26 +20,38 @@ public class AnimateNeedle : MonoBehaviour
 
     #region PRIVATE_VARIABLES
 
-    private void Update()
-    {
-        
-    }
+    private float mNeedleValue = 0f;
 
     #endregion  // PRIVATE_VARIABLES
 
 
     #region UNITY_MONOBEHAVIOUR_METHODS
+    
+    private void Update()
+    {
+        if (_MinAngle <= mNeedleValue && mNeedleValue <= _MaxAngle)
+        {
+            mNeedleValue += _NeedleSpeed * Time.deltaTime;
+        }
+    }
+
+
+
+    #endregion  // UNITY_MONOBEHAVIOUR_METHODS
+
+
+    #region PRIVATE_METHODS
+
 
     private IEnumerator UpdateGraph()
     {
         while (true)
         {
-            
-            
+
+
             yield return new WaitForSeconds(_RefreshTime);
         }
     }
 
-    #endregion  // UNITY_MONOBEHAVIOUR_METHODS
-
+    #endregion  // PRIVATE_METHODS
 }
