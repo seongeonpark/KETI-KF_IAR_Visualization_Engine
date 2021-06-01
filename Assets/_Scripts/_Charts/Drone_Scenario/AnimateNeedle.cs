@@ -15,7 +15,8 @@ public class AnimateNeedle : MonoBehaviour
     [SerializeField] private float _MaxValue;
     [Header("Data:")]
     [SerializeField] private float _RefreshTime;
-    [Space]
+    [Header("Test:")]
+    [SerializeField] private bool _IsTest;
     [SerializeField] private float _TestValue;
 
 
@@ -26,33 +27,42 @@ public class AnimateNeedle : MonoBehaviour
 
     private float mServerData = 0f;
     private float mNeedleValue = 0f;
-
+    private float mPreNeedleValue = 0f;
+    private float mCurrentNeedleValue = 0f;
+    
     #endregion  // PRIVATE_VARIABLES
 
 
     #region UNITY_MONOBEHAVIOUR_METHODS
 
-    private void Awake()
-    {
-        mServerData = _TestValue;
-    }
-
     private void Start()
     {
+        mCurrentNeedleValue = mServerData;
         StartCoroutine("UpdateGraph");
     }
 
     private void Update()
     {
+        _TestValue = Random.Range(0, 360);
+        if (_IsTest) mServerData = _TestValue;
+
         mNeedleValue = Mathf.Clamp(mNeedleValue, _MinValue, _MaxValue);
 
-        if (_MinValue <= mNeedleValue && mNeedleValue <= mServerData)
+        // Animation
+        if (mPreNeedleValue <= mNeedleValue && mNeedleValue < mCurrentNeedleValue)
         {
-            mNeedleValue += _NeedleSpeed * Time.deltaTime;
-            Debug.Log(mNeedleValue);
+            mNeedleValue = mNeedleValue + (_NeedleSpeed * Time.deltaTime);
 
-            _Needle.eulerAngles = new Vector3(0, 0, GetRotationOfValue());
         }
+        else if (mPreNeedleValue >= mNeedleValue && mNeedleValue > mCurrentNeedleValue)
+        {
+            mNeedleValue = mNeedleValue - (_NeedleSpeed * Time.deltaTime);
+        }
+        else
+        {
+            mNeedleValue = mCurrentNeedleValue;
+        }
+        _Needle.eulerAngles = new Vector3(0, 0, GetRotationOfValue());
     }
 
     #endregion  // UNITY_MONOBEHAVIOUR_METHODS
@@ -72,7 +82,8 @@ public class AnimateNeedle : MonoBehaviour
     {
         while (true)
         {
-            mNeedleValue = 0f;
+            mPreNeedleValue = mCurrentNeedleValue;
+            mCurrentNeedleValue = mServerData;
 
             yield return new WaitForSeconds(_RefreshTime);
         }
