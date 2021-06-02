@@ -38,7 +38,9 @@ public class AnimateNeedle : MonoBehaviour
     private void Start()
     {
         mCurrentNeedleValue = mServerData;
+
         StartCoroutine("UpdateGraph");
+        
     }
 
     private void Update()
@@ -51,17 +53,17 @@ public class AnimateNeedle : MonoBehaviour
         // Animation
         if (mPreNeedleValue <= mNeedleValue && mNeedleValue < mCurrentNeedleValue)
         {
-            mNeedleValue = mNeedleValue + (_NeedleSpeed * Time.deltaTime);
-
+            mNeedleValue += (_NeedleSpeed * Time.deltaTime);
         }
         else if (mPreNeedleValue >= mNeedleValue && mNeedleValue > mCurrentNeedleValue)
         {
-            mNeedleValue = mNeedleValue - (_NeedleSpeed * Time.deltaTime);
+            mNeedleValue -= (_NeedleSpeed * Time.deltaTime);
         }
         else
         {
             mNeedleValue = mCurrentNeedleValue;
         }
+
         _Needle.eulerAngles = new Vector3(0, 0, GetRotationOfValue());
     }
 
