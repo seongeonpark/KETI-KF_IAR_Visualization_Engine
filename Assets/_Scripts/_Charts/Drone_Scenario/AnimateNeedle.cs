@@ -31,7 +31,7 @@ public class AnimateNeedle : MonoBehaviour
     private float mCurrentNeedleValue = 0f;
     
     #endregion  // PRIVATE_VARIABLES
-
+        
 
     #region UNITY_MONOBEHAVIOUR_METHODS
 
