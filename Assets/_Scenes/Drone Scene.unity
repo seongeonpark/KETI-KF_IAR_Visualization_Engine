@@ -4221,6 +4221,7 @@ GameObject:
   - component: {fileID: 1511608299}
   - component: {fileID: 1511608301}
   - component: {fileID: 1511608300}
+  - component: {fileID: 1511608302}
   m_Layer: 5
   m_Name: AppBar
   m_TagString: Untagged
@@ -4287,6 +4288,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1511608298}
   m_CullTransparentMesh: 0
+--- !u!114 &1511608302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511608298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0507d04df69c4943830fc56a8208cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ActivationTimeTMP: {fileID: 219453829}
+  _DateTimeTMP: {fileID: 1135599840}
 --- !u!1 &1533205999
 GameObject:
   m_ObjectHideFlags: 0

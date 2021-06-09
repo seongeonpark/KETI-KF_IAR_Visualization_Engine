@@ -6,15 +6,11 @@ using UnityEngine;
 
 public class Drone_AppBar : MonoBehaviour
 {
+    [Header("UI:")]
     [SerializeField] private TextMeshProUGUI _ActivationTimeTMP;
     [SerializeField] private TextMeshProUGUI _DateTimeTMP;
 
     private DateTime mStartTime;
-
-    private void Awake()
-    {
-
-    }
 
     void Start()
     {
