@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AnimateNeedle : MonoBehaviour
@@ -14,16 +13,18 @@ public class AnimateNeedle : MonoBehaviour
     [SerializeField] private float _MinValue;
     [SerializeField] private float _MaxValue;
     [Header("Data:")]
+    [SerializeField] private GameObject _Http_Parser;
     [SerializeField] private float _RefreshTime;
     [Header("Test:")]
     [SerializeField] private bool _IsTest;
     [SerializeField] private float _TestValue;
 
-
     #endregion  // Inspector_Window_Variables
 
 
     #region PRIVATE_VARIABLES
+
+    private HTTP_Parser_v01 mParser;
 
     private float mServerData = 0f;
     private float mNeedleValue = 0f;
@@ -37,6 +38,7 @@ public class AnimateNeedle : MonoBehaviour
 
     private void Start()
     {
+        mParser = _Http_Parser.GetComponent<HTTP_Parser_v01>();
         mCurrentNeedleValue = mServerData;
 
         StartCoroutine("UpdateGraph");
@@ -45,8 +47,15 @@ public class AnimateNeedle : MonoBehaviour
 
     private void Update()
     {
-        _TestValue = Random.Range(0, 360);
-        if (_IsTest) mServerData = _TestValue;
+        if (_IsTest)    // make test value
+        {
+            _TestValue = Random.Range(0, 360);
+            mServerData = _TestValue;
+        }
+        else
+        {
+            mServerData = mParser._out_pitch[0] * 1000.0f;
+        }
 
         mNeedleValue = Mathf.Clamp(mNeedleValue, _MinValue, _MaxValue);
 
@@ -86,7 +95,7 @@ public class AnimateNeedle : MonoBehaviour
         {
             mPreNeedleValue = mCurrentNeedleValue;
             mCurrentNeedleValue = mServerData;
-
+            
             yield return new WaitForSeconds(_RefreshTime);
         }
     }
