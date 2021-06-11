@@ -21,7 +21,7 @@ public class Drone_AppBar : MonoBehaviour
     {
         
         TimeSpan timeDiff = DateTime.Now - mStartTime;
-        _ActivationTimeTMP.text = string.Format("Elapsed time {0:mm\\:ss}", timeDiff);
+        _ActivationTimeTMP.text = string.Format("Elapsed Time {0:mm\\:ss}", timeDiff);
         _DateTimeTMP.text = DateTime.Now.ToString("yyyy/MM/dd   HH:mm:ss");
     }
 }
