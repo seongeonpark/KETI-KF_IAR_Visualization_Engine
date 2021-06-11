@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class AnimateNeedle : MonoBehaviour
@@ -12,6 +13,8 @@ public class AnimateNeedle : MonoBehaviour
     [SerializeField] private float _AngleOfEnd;
     [SerializeField] private float _MinValue;
     [SerializeField] private float _MaxValue;
+    [Space()]
+    [SerializeField] private TextMeshProUGUI _Text;
     [Header("Data:")]
     [SerializeField] private GameObject _Http_Parser;
     [SerializeField] private float _RefreshTime;
@@ -57,7 +60,7 @@ public class AnimateNeedle : MonoBehaviour
             mServerData = mParser._out_pitch[0] * 1000.0f;
         }
 
-        mNeedleValue = Mathf.Clamp(mNeedleValue, _MinValue, _MaxValue);
+        mNeedleValue = Mathf.Clamp(mServerData, _MinValue, _MaxValue);
 
         // Animation
         if (mPreNeedleValue <= mNeedleValue && mNeedleValue < mCurrentNeedleValue)
@@ -74,6 +77,8 @@ public class AnimateNeedle : MonoBehaviour
         }
 
         _Needle.eulerAngles = new Vector3(0, 0, GetRotationOfValue());
+
+        
     }
 
     #endregion  // UNITY_MONOBEHAVIOUR_METHODS
@@ -95,7 +100,13 @@ public class AnimateNeedle : MonoBehaviour
         {
             mPreNeedleValue = mCurrentNeedleValue;
             mCurrentNeedleValue = mServerData;
-            
+
+            // Text indicator
+            if (_Text != null)
+            {
+                _Text.text = string.Format("{0} %", mServerData);
+            }
+
             yield return new WaitForSeconds(_RefreshTime);
         }
     }
