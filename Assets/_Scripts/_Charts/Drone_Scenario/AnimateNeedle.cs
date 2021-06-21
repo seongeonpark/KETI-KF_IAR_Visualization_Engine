@@ -50,33 +50,37 @@ public class AnimateNeedle : MonoBehaviour
 
     private void Update()
     {
+        //mServerData = mParser._out_pitch[0] * 10000.0f;
+        //Debug.Log("server data: " + mServerData);
+
         if (_IsTest)    // make test value
         {
             _TestValue = Random.Range(0, 360);
             mServerData = _TestValue;
         }
-        else
-        {
-            mServerData = mParser._out_pitch[0] * 1000.0f;
-        }
 
         mNeedleValue = Mathf.Clamp(mServerData, _MinValue, _MaxValue);
+        Debug.Log("needle value: " + mNeedleValue);
+
 
         // Animation
         if (mPreNeedleValue <= mNeedleValue && mNeedleValue < mCurrentNeedleValue)
         {
             mNeedleValue += (_NeedleSpeed * Time.deltaTime);
+
         }
         else if (mPreNeedleValue >= mNeedleValue && mNeedleValue > mCurrentNeedleValue)
         {
             mNeedleValue -= (_NeedleSpeed * Time.deltaTime);
+            Debug.Log("animation needle value: " + mNeedleValue);
+
         }
         else
         {
             mNeedleValue = mCurrentNeedleValue;
         }
 
-        _Needle.eulerAngles = new Vector3(0, 0, GetRotationOfValue());
+        _Needle.eulerAngles = new Vector3(0, 0, GetRotationOfValue(mNeedleValue));
 
         
     }
@@ -86,10 +90,10 @@ public class AnimateNeedle : MonoBehaviour
 
     #region PRIVATE_METHODS
 
-    private float GetRotationOfValue()
+    private float GetRotationOfValue(float value)
     {
         float totalAngleSize = Mathf.Abs(_AngleOfStart - _AngleOfEnd);
-        float valueNormalized = mNeedleValue / _MaxValue;
+        float valueNormalized = value / _MaxValue;
 
         return _AngleOfStart - (valueNormalized * totalAngleSize);
     }
@@ -100,6 +104,7 @@ public class AnimateNeedle : MonoBehaviour
         {
             mPreNeedleValue = mCurrentNeedleValue;
             mCurrentNeedleValue = mServerData;
+
 
             // Text indicator
             if (_Text != null)
