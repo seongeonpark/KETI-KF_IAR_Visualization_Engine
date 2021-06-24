@@ -828,8 +828,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e497712bf4be25d4896b62d39f21fcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ChartType: 2
   _Needle: {fileID: 129056688}
-  _NeedleSpeed: 150
+  _NeedleSpeed: 300
   _AngleOfStart: 0
   _AngleOfEnd: -360
   _MinValue: 0
@@ -837,8 +838,8 @@ MonoBehaviour:
   _Text: {fileID: 0}
   _Http_Parser: {fileID: 1666453877}
   _RefreshTime: 3
-  _IsTest: 0
-  _TestValue: 90
+  _IsTest: 1
+  _TestValue: 100
 --- !u!114 &219808578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1137,11 +1138,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261966224}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e497712bf4be25d4896b62d39f21fcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ChartType: 0
   _Needle: {fileID: 1355252946}
   _NeedleSpeed: 150
   _AngleOfStart: 0
@@ -1217,11 +1219,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 352759181}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e497712bf4be25d4896b62d39f21fcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ChartType: 0
   _Needle: {fileID: 388149153}
   _NeedleSpeed: 150
   _AngleOfStart: 0
@@ -2935,6 +2938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e497712bf4be25d4896b62d39f21fcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ChartType: 0
   _Needle: {fileID: 239794828}
   _NeedleSpeed: 150
   _AngleOfStart: 0
@@ -4136,6 +4140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e497712bf4be25d4896b62d39f21fcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ChartType: 0
   _Needle: {fileID: 1533206000}
   _NeedleSpeed: 150
   _AngleOfStart: 70
@@ -4921,11 +4926,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1554616359}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e497712bf4be25d4896b62d39f21fcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ChartType: 0
   _Needle: {fileID: 1984142801}
   _NeedleSpeed: 150
   _AngleOfStart: 0
@@ -5752,11 +5758,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1770370834}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e497712bf4be25d4896b62d39f21fcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ChartType: 0
   _Needle: {fileID: 1932204882}
   _NeedleSpeed: 150
   _AngleOfStart: 0
