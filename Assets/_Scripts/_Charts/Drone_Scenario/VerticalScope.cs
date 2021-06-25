@@ -1,20 +1,10 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public enum EChartType
-{
-    Battery_remain,
-    Airspeed,
-    HeadingIndicator,
-    TurnCoordinator,
-    Attitude_roll,
-    Attitude_pitch,
-    Battery_voltage
-}
-
-public class AnimateNeedle : MonoBehaviour
+public class VerticalScope : MonoBehaviour
 {
     #region Inspector_Window_Variables
     [SerializeField] private EChartType _ChartType;
@@ -26,14 +16,12 @@ public class AnimateNeedle : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _Text;
 
     [Space()]
-    [SerializeField] private float _AngleOfStart;
-    [SerializeField] private float _AngleOfEnd;
+    [SerializeField] private float _PosOfStart;
+    [SerializeField] private float _PosOfEnd;
 
     [Space()]
     [SerializeField] private float _MinValue;
     [SerializeField] private float _MaxValue;
-
-    
 
     [Header("Data:")]
     [SerializeField] private GameObject _Http_Parser;
@@ -44,7 +32,6 @@ public class AnimateNeedle : MonoBehaviour
     [SerializeField] private float _TestValue;
 
     #endregion  // Inspector_Window_Variables
-
 
     #region PRIVATE_VARIABLES
 
@@ -82,34 +69,33 @@ public class AnimateNeedle : MonoBehaviour
         if (m_PreNeedleValue <= m_NeedleValue && m_NeedleValue < m_CurrentNeedleValue)
         {
             m_NeedleValue += _NeedleSpeed * Time.deltaTime;
-            _Needle.eulerAngles = new Vector3(0, 0, GetRotation(m_NeedleValue));
+            _Needle.localPosition = new Vector3(0, GetPostion(m_NeedleValue), 0);
         }
         else if (m_CurrentNeedleValue < m_NeedleValue && m_NeedleValue <= m_PreNeedleValue)
         {
             m_NeedleValue -= _NeedleSpeed * Time.deltaTime;
-            _Needle.eulerAngles = new Vector3(0, 0, GetRotation(m_NeedleValue));
+            _Needle.localPosition = new Vector3(0, GetPostion(m_NeedleValue), 0);
         }
         else
         {
             m_NeedleValue = m_CurrentNeedleValue;
-            _Needle.eulerAngles = new Vector3(0, 0, GetRotation(m_NeedleValue));
+            _Needle.localPosition = new Vector3(0, GetPostion(m_NeedleValue), 0);
         }
 
     }
 
     #endregion  // UNITY_MONOBEHAVIOUR_METHODS
 
-
     #region PRIVATE_METHODS
 
-    private float GetRotation(float value)
+    private float GetPostion(float value)
     {
-        float totalAngleSize = Mathf.Abs(_AngleOfStart - _AngleOfEnd);
-        float valueNormalized = (value - _MinValue) / (_MaxValue-_MinValue);
+        float totalScopeSize = Mathf.Abs(_PosOfStart - _PosOfEnd);
+        float valueNormalized = (value - _MinValue) / (_MaxValue - _MinValue);
 
-        return _AngleOfStart - (valueNormalized * totalAngleSize);
+        return _PosOfStart - (valueNormalized * totalScopeSize);
     }
-    
+
     private float GetParserData(EChartType chart)
     {
         float data;
@@ -218,7 +204,7 @@ public class AnimateNeedle : MonoBehaviour
             m_NeedleValue = m_PreNeedleValue;
             // .... normalization
             m_CurrentNeedleValue = Mathf.Clamp(m_ServerData, _MinValue, _MaxValue);
-            
+
             // Text indicator
             if (_Text != null)
             {
