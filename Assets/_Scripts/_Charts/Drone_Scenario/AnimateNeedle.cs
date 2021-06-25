@@ -11,7 +11,8 @@ public enum EChartType
     TurnCoordinator,
     Attitude_roll,
     Attitude_pitch,
-    Battery_voltage
+    Battery_voltage,
+    Altitude
 }
 
 public class AnimateNeedle : MonoBehaviour
@@ -24,6 +25,7 @@ public class AnimateNeedle : MonoBehaviour
     [SerializeField] private float _NeedleSpeed;
     [Space()]
     [SerializeField] private TextMeshProUGUI _Text;
+    [SerializeField] private string _TextUnit;
 
     [Space()]
     [SerializeField] private float _AngleOfStart;
@@ -222,7 +224,7 @@ public class AnimateNeedle : MonoBehaviour
             // Text indicator
             if (_Text != null)
             {
-                _Text.text = string.Format("{0} %", m_CurrentNeedleValue);
+                _Text.text = string.Format("{0} {1}", m_CurrentNeedleValue, _TextUnit);
             }
 
             yield return new WaitForSeconds(_RefreshTime);

@@ -14,7 +14,7 @@ public class VerticalScope : MonoBehaviour
     [SerializeField] private float _NeedleSpeed;
     [Space()]
     [SerializeField] private TextMeshProUGUI _Text;
-
+    [SerializeField] private string _TextUnit;
     [Space()]
     [SerializeField] private float _PosOfStart;
     [SerializeField] private float _PosOfEnd;
@@ -208,7 +208,7 @@ public class VerticalScope : MonoBehaviour
             // Text indicator
             if (_Text != null)
             {
-                _Text.text = string.Format("{0} %", m_CurrentNeedleValue);
+                _Text.text = string.Format("{0} {1}", m_CurrentNeedleValue, _TextUnit);
             }
 
             yield return new WaitForSeconds(_RefreshTime);
