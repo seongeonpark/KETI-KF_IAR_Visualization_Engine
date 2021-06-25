@@ -12,7 +12,9 @@ public enum EChartType
     Attitude_roll,
     Attitude_pitch,
     Battery_voltage,
-    Altitude
+    Altitude,
+    Latitude,
+    Longitude
 }
 
 public class AnimateNeedle : MonoBehaviour
