@@ -9,7 +9,8 @@ public enum EChartType
     Airspeed,
     HeadingIndicator,
     TurnCoordinator,
-    Attitude,
+    Attitude_roll,
+    Attitude_pitch,
     Battery_voltage
 }
 
@@ -21,6 +22,8 @@ public class AnimateNeedle : MonoBehaviour
     [Header("UI:")]
     [SerializeField] private RectTransform _Needle;
     [SerializeField] private float _NeedleSpeed;
+    [Space()]
+    [SerializeField] private TextMeshProUGUI _Text;
 
     [Space()]
     [SerializeField] private float _AngleOfStart;
@@ -30,8 +33,7 @@ public class AnimateNeedle : MonoBehaviour
     [SerializeField] private float _MinValue;
     [SerializeField] private float _MaxValue;
 
-    [Space()]
-    [SerializeField] private TextMeshProUGUI _Text;
+    
 
     [Header("Data:")]
     [SerializeField] private GameObject _Http_Parser;
@@ -73,7 +75,7 @@ public class AnimateNeedle : MonoBehaviour
     {
         if (!m_IsReady)
         {
-            m_IsReady = isReady(_ChartType);
+            m_IsReady = IsConnected(_ChartType);
         }
 
         // # 3. Animation
@@ -103,7 +105,7 @@ public class AnimateNeedle : MonoBehaviour
     private float GetRotation(float value)
     {
         float totalAngleSize = Mathf.Abs(_AngleOfStart - _AngleOfEnd);
-        float valueNormalized = value / _MaxValue;
+        float valueNormalized = (value - _MinValue) / (_MaxValue-_MinValue);
 
         return _AngleOfStart - (valueNormalized * totalAngleSize);
     }
@@ -126,9 +128,12 @@ public class AnimateNeedle : MonoBehaviour
             case EChartType.TurnCoordinator:
             //    data = m_Parser._out_roll[0];
             //    data = m_Parser._out_pitch[0];
-            case EChartType.Attitude:
-            //    data = m_Parser._out_roll[0];
-            //    data = m_Parser._out_pitch[0];
+            case EChartType.Attitude_roll:
+                data = m_Parser._out_roll[0];
+                break;
+            case EChartType.Attitude_pitch:
+                data = m_Parser._out_pitch[0];
+                break;
             case EChartType.Battery_voltage:
                 data = m_Parser._out_currentbattery[0];
                 break;
@@ -140,7 +145,7 @@ public class AnimateNeedle : MonoBehaviour
         return Convert.ToSingle(data);
     }
 
-    private bool isReady(EChartType chart)
+    private bool IsConnected(EChartType chart)
     {
         switch (chart)
         {
@@ -167,12 +172,18 @@ public class AnimateNeedle : MonoBehaviour
                 //    return true;
                 //}
                 //else return false;
-            case EChartType.Attitude:
-                //if (0 < m_Parser._out_pitch.Count && 0 < m_Parser._out_roll.Count)
-                //{
-                //    return true;
-                //}
-                //else return false;
+            case EChartType.Attitude_roll:
+                if (0 < m_Parser._out_roll.Count)
+                {
+                    return true;
+                }
+                else return false;
+            case EChartType.Attitude_pitch:
+                if (0 < m_Parser._out_pitch.Count)
+                {
+                    return true;
+                }
+                else return false;
             case EChartType.Battery_voltage:
                 if (0 < m_Parser._out_currentbattery.Count)
                 {
@@ -201,18 +212,16 @@ public class AnimateNeedle : MonoBehaviour
             }
 
             // # 2. Pre-processing
-            // .... normalization
-            m_CurrentNeedleValue = Mathf.Clamp(m_ServerData, _MinValue, _MaxValue);
-
-            // # 2. Pre-processing
             // .... config
             m_PreNeedleValue = m_CurrentNeedleValue;
             m_NeedleValue = m_PreNeedleValue;
-
+            // .... normalization
+            m_CurrentNeedleValue = Mathf.Clamp(m_ServerData, _MinValue, _MaxValue);
+            
             // Text indicator
             if (_Text != null)
             {
-                _Text.text = string.Format("{0} %", m_ServerData);
+                _Text.text = string.Format("{0} %", m_CurrentNeedleValue);
             }
 
             yield return new WaitForSeconds(_RefreshTime);

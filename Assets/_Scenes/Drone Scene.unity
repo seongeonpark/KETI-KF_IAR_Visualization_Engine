@@ -831,11 +831,11 @@ MonoBehaviour:
   _ChartType: 2
   _Needle: {fileID: 129056688}
   _NeedleSpeed: 300
+  _Text: {fileID: 0}
   _AngleOfStart: 0
   _AngleOfEnd: -360
   _MinValue: 0
   _MaxValue: 360
-  _Text: {fileID: 0}
   _Http_Parser: {fileID: 1666453877}
   _RefreshTime: 3
   _IsTest: 1
@@ -1138,22 +1138,22 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261966224}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e497712bf4be25d4896b62d39f21fcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ChartType: 0
+  _ChartType: 5
   _Needle: {fileID: 1355252946}
   _NeedleSpeed: 150
-  _AngleOfStart: 0
-  _AngleOfEnd: -360
-  _MinValue: 0
-  _MaxValue: 360
   _Text: {fileID: 0}
-  _Http_Parser: {fileID: 0}
+  _AngleOfStart: 75
+  _AngleOfEnd: -75
+  _MinValue: 4
+  _MaxValue: 24
+  _Http_Parser: {fileID: 1666453877}
   _RefreshTime: 3
-  _IsTest: 0
+  _IsTest: 1
   _TestValue: 90
 --- !u!1 &352759181
 GameObject:
@@ -1219,19 +1219,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 352759181}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e497712bf4be25d4896b62d39f21fcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ChartType: 0
+  _ChartType: 1
   _Needle: {fileID: 388149153}
   _NeedleSpeed: 150
+  _Text: {fileID: 0}
   _AngleOfStart: 0
   _AngleOfEnd: -360
   _MinValue: 0
-  _MaxValue: 360
-  _Text: {fileID: 0}
+  _MaxValue: 240
   _Http_Parser: {fileID: 1666453877}
   _RefreshTime: 3
   _IsTest: 1
@@ -2941,11 +2941,11 @@ MonoBehaviour:
   _ChartType: 0
   _Needle: {fileID: 239794828}
   _NeedleSpeed: 150
+  _Text: {fileID: 0}
   _AngleOfStart: 0
   _AngleOfEnd: -360
   _MinValue: 0
   _MaxValue: 240
-  _Text: {fileID: 0}
   _Http_Parser: {fileID: 0}
   _RefreshTime: 3
   _IsTest: 0
@@ -4135,7 +4135,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1378677051}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e497712bf4be25d4896b62d39f21fcb7, type: 3}
   m_Name: 
@@ -4143,11 +4143,11 @@ MonoBehaviour:
   _ChartType: 0
   _Needle: {fileID: 1533206000}
   _NeedleSpeed: 150
-  _AngleOfStart: 70
-  _AngleOfEnd: -70
+  _Text: {fileID: 2025180238}
+  _AngleOfStart: 75
+  _AngleOfEnd: -75
   _MinValue: 0
   _MaxValue: 100
-  _Text: {fileID: 0}
   _Http_Parser: {fileID: 1666453877}
   _RefreshTime: 3
   _IsTest: 1
@@ -4931,14 +4931,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e497712bf4be25d4896b62d39f21fcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ChartType: 0
+  _ChartType: 3
   _Needle: {fileID: 1984142801}
   _NeedleSpeed: 150
+  _Text: {fileID: 0}
   _AngleOfStart: 0
   _AngleOfEnd: -360
   _MinValue: 0
   _MaxValue: 360
-  _Text: {fileID: 0}
   _Http_Parser: {fileID: 0}
   _RefreshTime: 3
   _IsTest: 0
@@ -5740,17 +5740,23 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1770370834}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8dac412acf99e4541bb19259a399a1ff, type: 3}
+  m_Script: {fileID: 11500000, guid: e497712bf4be25d4896b62d39f21fcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RepeatTime: 3
-  IoTs:
-  - Min: 0
-    Max: 360
-  IoTData:
-  - 0
+  _ChartType: 4
+  _Needle: {fileID: 239721147}
+  _NeedleSpeed: 150
+  _Text: {fileID: 0}
+  _AngleOfStart: 0
+  _AngleOfEnd: 0
+  _MinValue: 0
+  _MaxValue: 0
+  _Http_Parser: {fileID: 0}
+  _RefreshTime: 0
+  _IsTest: 0
+  _TestValue: 0
 --- !u!114 &1770370837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5758,22 +5764,22 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1770370834}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e497712bf4be25d4896b62d39f21fcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ChartType: 0
+  _ChartType: 4
   _Needle: {fileID: 1932204882}
   _NeedleSpeed: 150
-  _AngleOfStart: 0
-  _AngleOfEnd: -360
-  _MinValue: 0
-  _MaxValue: 360
   _Text: {fileID: 0}
-  _Http_Parser: {fileID: 0}
+  _AngleOfStart: 180
+  _AngleOfEnd: -180
+  _MinValue: -180
+  _MaxValue: 180
+  _Http_Parser: {fileID: 1666453877}
   _RefreshTime: 3
-  _IsTest: 0
+  _IsTest: 1
   _TestValue: 90
 --- !u!1 &1801120859
 GameObject:
