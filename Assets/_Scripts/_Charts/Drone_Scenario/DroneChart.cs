@@ -22,11 +22,10 @@ public class DroneChart : MonoBehaviour
     [SerializeField] private float _MinValue;
     [SerializeField] private float _MaxValue;
 
-    
-
     [Header("Data:")]
     [SerializeField] private GameObject _Http_Parser;
     [SerializeField] private float _RefreshTime;
+    [SerializeField] private float _OutputData;
 
     [Header("Test:")]
     [SerializeField] private bool _IsTest;
@@ -75,18 +74,25 @@ public class DroneChart : MonoBehaviour
         if (m_PreNeedleValue <= m_NeedleValue && m_NeedleValue < m_CurrentNeedleValue)
         {
             m_NeedleValue += _NeedleSpeed * Time.deltaTime;
-            _Needle.eulerAngles = new Vector3(0, 0, GetRotation(m_NeedleValue));
         }
         else if (m_CurrentNeedleValue < m_NeedleValue && m_NeedleValue <= m_PreNeedleValue)
         {
             m_NeedleValue -= _NeedleSpeed * Time.deltaTime;
-            _Needle.eulerAngles = new Vector3(0, 0, GetRotation(m_NeedleValue));
         }
         else
         {
             m_NeedleValue = m_CurrentNeedleValue;
-            _Needle.eulerAngles = new Vector3(0, 0, GetRotation(m_NeedleValue));
         }
+
+        _Needle.eulerAngles = new Vector3(0, 0, GetRotation(m_NeedleValue));
+
+        // Text indicator
+        if (_Text)
+        {
+            _Text.text = string.Format("{0:N0} {1}", m_NeedleValue, _TextUnit);
+        }
+
+        _OutputData = m_ServerData;
 
     }
 
@@ -116,12 +122,7 @@ public class DroneChart : MonoBehaviour
             m_NeedleValue = m_PreNeedleValue;
             // .... normalization
             m_CurrentNeedleValue = Mathf.Clamp(m_ServerData, _MinValue, _MaxValue);
-            
-            // Text indicator
-            if (_Text != null)
-            {
-                _Text.text = string.Format("{0} {1}", m_CurrentNeedleValue, _TextUnit);
-            }
+
 
             yield return new WaitForSeconds(_RefreshTime);
         }

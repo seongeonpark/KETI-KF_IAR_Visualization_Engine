@@ -31,21 +31,25 @@ public class ParserManager : MonoBehaviour
         switch (chart)
         {
             case EDroneChartType.Battery_remain:
-                break;
-            case EDroneChartType.Airspeed:
                 if (0 < m_Parser._out_remainbattery.Count)
                 {
                     return true;
                 }
                 else return false;
-            case EDroneChartType.HeadingIndicator:
+            case EDroneChartType.Airspeed:
                 if (0 < m_Parser._out_airspeed.Count)
                 {
                     return true;
                 }
                 else return false;
+            case EDroneChartType.HeadingIndicator:
+                if (0 < m_Parser._out_yaw.Count)
+                {
+                    return true;
+                }
+                else return false;
             case EDroneChartType.TurnCoordinator:
-                if (0 < m_Parser._out_roll.Count)
+                if (0 < m_Parser._out_yaw.Count)
                 {
                     return true;
                 }

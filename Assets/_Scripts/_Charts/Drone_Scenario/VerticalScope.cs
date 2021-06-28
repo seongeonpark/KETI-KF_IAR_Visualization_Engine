@@ -24,6 +24,8 @@ public class VerticalScope : MonoBehaviour
     [Header("Data:")]
     [SerializeField] private GameObject _Http_Parser;
     [SerializeField] private float _RefreshTime;
+    [SerializeField] private float _OutputData;
+
 
     [Header("Test:")]
     [SerializeField] private bool _IsTest;
@@ -43,6 +45,7 @@ public class VerticalScope : MonoBehaviour
     private float m_CurrentNeedleValue = 0f;
 
     private bool m_IsReady = false;
+
 
     #endregion  // PRIVATE_VARIABLES
 
@@ -69,25 +72,32 @@ public class VerticalScope : MonoBehaviour
         }
 
         // #4. Animation
-        if (_Needle)
+        if (m_PreNeedleValue <= m_NeedleValue && m_NeedleValue < m_CurrentNeedleValue)
         {
-            if (m_PreNeedleValue <= m_NeedleValue && m_NeedleValue < m_CurrentNeedleValue)
-            {
-                m_NeedleValue += _NeedleSpeed * Time.deltaTime;
-                _Needle.localPosition = new Vector3(0, GetPostion(m_NeedleValue), 0);
-            }
-            else if (m_CurrentNeedleValue < m_NeedleValue && m_NeedleValue <= m_PreNeedleValue)
-            {
-                m_NeedleValue -= _NeedleSpeed * Time.deltaTime;
-                _Needle.localPosition = new Vector3(0, GetPostion(m_NeedleValue), 0);
-            }
-            else
-            {
-                m_NeedleValue = m_CurrentNeedleValue;
-                _Needle.localPosition = new Vector3(0, GetPostion(m_NeedleValue), 0);
-            }
+            m_NeedleValue += _NeedleSpeed * Time.deltaTime;
+        }
+        else if (m_CurrentNeedleValue < m_NeedleValue && m_NeedleValue <= m_PreNeedleValue)
+        {
+            m_NeedleValue -= _NeedleSpeed * Time.deltaTime;
+        }
+        else
+        {
+            m_NeedleValue = m_CurrentNeedleValue;
         }
 
+        // Needle
+        if (_Needle)
+        {
+            _Needle.localPosition = new Vector3(0, GetPostion(m_NeedleValue), 0);
+        }
+
+        // Text indicator
+        if (_Text)
+        {
+            _Text.text = string.Format("{0:N0} {1}", m_NeedleValue, _TextUnit);
+        }
+
+        _OutputData = m_ServerData;
     }
 
     #endregion  // UNITY_MONOBEHAVIOUR_METHODS
@@ -124,11 +134,7 @@ public class VerticalScope : MonoBehaviour
             // .... normalization
             m_CurrentNeedleValue = Mathf.Clamp(m_ServerData, _MinValue, _MaxValue);
 
-            // Text indicator
-            if (_Text != null)
-            {
-                _Text.text = string.Format("{0} {1}", m_CurrentNeedleValue, _TextUnit);
-            }
+            
 
             yield return new WaitForSeconds(_RefreshTime);
         }
