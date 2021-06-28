@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -69,15 +70,46 @@ public class SidebarManager : MonoBehaviour
                 //_TestValue = Random.Range(0, 360);
                 m_ServerData = _TestValue;
             }
+
             if (!_IsTest && m_IsReady)
             {
                 // # 1. Get data from SERVER
-                _Indicators[0].text = string.Format("{0}", m_ParserManager.GetParsingDataOf(EDroneChartType.Latitude));
-                Debug.Log("latitude: " + m_ParserManager.GetParsingDataOf(EDroneChartType.Latitude));
-                _Indicators[1].text = string.Format("{0}", m_ParserManager.GetParsingDataOf(EDroneChartType.Longitude));
+                _Indicators[0].text = string.Format("{0}", GetGPS(EDroneChartType.Latitude));
+                _Indicators[1].text = string.Format("{0}", GetGPS(EDroneChartType.Longitude));
+                Debug.Log("latitude: " + GetGPS(EDroneChartType.Latitude));
+                Debug.Log("longitude: " + GetGPS(EDroneChartType.Longitude));
             }
 
             yield return new WaitForSeconds(_RefreshTime);
         }
+    }
+
+    private string GetGPS(EDroneChartType chart)
+    {
+        var data = m_ParserManager.GetParsingDataOf(chart);
+        string text = Convert.ToString(data);
+
+        string degree = "";
+        string min = "";
+        string sec = "";
+        string result = "";
+
+        if (chart == EDroneChartType.Latitude)
+        {
+            degree = text.Substring(0, 2);
+            min = text.Substring(3, 2);
+            sec = text.Substring(4, 2);
+            result = string.Format("{0:N3}˚{1}'{2}\"E", degree, min, sec);
+        }
+        else if (chart == EDroneChartType.Longitude)
+        {
+            degree = text.Substring(0, 3);
+            min = text.Substring(4, 2);
+            sec = text.Substring(5, 2);
+            result = string.Format("{0:N3}˚{1}'{2}\"N", degree, min, sec);
+
+        }
+
+        return result;
     }
 }

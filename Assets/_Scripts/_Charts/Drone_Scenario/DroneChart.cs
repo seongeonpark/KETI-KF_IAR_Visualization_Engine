@@ -35,7 +35,6 @@ public class DroneChart : MonoBehaviour
 
 
     #region PRIVATE_VARIABLES
-    
     private HTTP_Parser_v01 m_Parser;
     private ParserManager m_ParserManager;
 
@@ -50,7 +49,6 @@ public class DroneChart : MonoBehaviour
 
 
     #region UNITY_MONOBEHAVIOUR_METHODS
-
     private void Awake()
     {
         m_Parser = _Http_Parser.GetComponent<HTTP_Parser_v01>();

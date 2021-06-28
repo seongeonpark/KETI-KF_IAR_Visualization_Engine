@@ -113,7 +113,7 @@ public class ParserManager : MonoBehaviour
                 data = Convert.ToSingle(m_Parser._out_yaw[0]);
                 break;
             case EDroneChartType.TurnCoordinator:
-                data = Convert.ToSingle(m_Parser._out_roll[0]);
+                data = Convert.ToSingle(m_Parser._out_yaw[0]);
                 break;
             case EDroneChartType.Attitude_roll:
                 data = Convert.ToSingle(m_Parser._out_roll[0]);
