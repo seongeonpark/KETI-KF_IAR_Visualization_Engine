@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-public class VerticalScope : MonoBehaviour
+public class DroneChart : MonoBehaviour
 {
     #region Inspector_Window_Variables
     [SerializeField] private EDroneChartType _ChartType;
@@ -13,13 +13,16 @@ public class VerticalScope : MonoBehaviour
     [Space()]
     [SerializeField] private TextMeshProUGUI _Text;
     [SerializeField] private string _TextUnit;
+
     [Space()]
-    [SerializeField] private float _PosOfStart;
-    [SerializeField] private float _PosOfEnd;
+    [SerializeField] private float _AngleOfStart;
+    [SerializeField] private float _AngleOfEnd;
 
     [Space()]
     [SerializeField] private float _MinValue;
     [SerializeField] private float _MaxValue;
+
+    
 
     [Header("Data:")]
     [SerializeField] private GameObject _Http_Parser;
@@ -33,7 +36,7 @@ public class VerticalScope : MonoBehaviour
 
 
     #region PRIVATE_VARIABLES
-
+    
     private HTTP_Parser_v01 m_Parser;
     private ParserManager m_ParserManager;
 
@@ -41,7 +44,7 @@ public class VerticalScope : MonoBehaviour
     private float m_NeedleValue = 0f;
     private float m_PreNeedleValue = 0f;
     private float m_CurrentNeedleValue = 0f;
-
+    
     private bool m_IsReady = false;
 
     #endregion  // PRIVATE_VARIABLES
@@ -69,38 +72,28 @@ public class VerticalScope : MonoBehaviour
         }
 
         // #4. Animation
-        if (_Needle)
+        if (m_PreNeedleValue <= m_NeedleValue && m_NeedleValue < m_CurrentNeedleValue)
         {
-            if (m_PreNeedleValue <= m_NeedleValue && m_NeedleValue < m_CurrentNeedleValue)
-            {
-                m_NeedleValue += _NeedleSpeed * Time.deltaTime;
-                _Needle.localPosition = new Vector3(0, GetPostion(m_NeedleValue), 0);
-            }
-            else if (m_CurrentNeedleValue < m_NeedleValue && m_NeedleValue <= m_PreNeedleValue)
-            {
-                m_NeedleValue -= _NeedleSpeed * Time.deltaTime;
-                _Needle.localPosition = new Vector3(0, GetPostion(m_NeedleValue), 0);
-            }
-            else
-            {
-                m_NeedleValue = m_CurrentNeedleValue;
-                _Needle.localPosition = new Vector3(0, GetPostion(m_NeedleValue), 0);
-            }
+            m_NeedleValue += _NeedleSpeed * Time.deltaTime;
+            _Needle.eulerAngles = new Vector3(0, 0, GetRotation(m_NeedleValue));
+        }
+        else if (m_CurrentNeedleValue < m_NeedleValue && m_NeedleValue <= m_PreNeedleValue)
+        {
+            m_NeedleValue -= _NeedleSpeed * Time.deltaTime;
+            _Needle.eulerAngles = new Vector3(0, 0, GetRotation(m_NeedleValue));
+        }
+        else
+        {
+            m_NeedleValue = m_CurrentNeedleValue;
+            _Needle.eulerAngles = new Vector3(0, 0, GetRotation(m_NeedleValue));
         }
 
     }
 
     #endregion  // UNITY_MONOBEHAVIOUR_METHODS
 
+
     #region PRIVATE_METHODS
-
-    private float GetPostion(float value)
-    {
-        float totalScopeSize = Mathf.Abs(_PosOfStart - _PosOfEnd);
-        float valueNormalized = (value - _MinValue) / (_MaxValue - _MinValue);
-
-        return _PosOfStart - (valueNormalized * totalScopeSize);
-    }
 
     private IEnumerator UpdateGraph()
     {
@@ -117,13 +110,13 @@ public class VerticalScope : MonoBehaviour
                 m_ServerData = m_ParserManager.GetParsingDataOf(_ChartType);
             }
 
-            // #3. Pre-processing
+            // # 3. Pre-processing
             // .... initialization
             m_PreNeedleValue = m_CurrentNeedleValue;
             m_NeedleValue = m_PreNeedleValue;
             // .... normalization
             m_CurrentNeedleValue = Mathf.Clamp(m_ServerData, _MinValue, _MaxValue);
-
+            
             // Text indicator
             if (_Text != null)
             {
@@ -132,6 +125,14 @@ public class VerticalScope : MonoBehaviour
 
             yield return new WaitForSeconds(_RefreshTime);
         }
+    }
+    
+    private float GetRotation(float value)
+    {
+        float totalAngleSize = Mathf.Abs(_AngleOfStart - _AngleOfEnd);
+        float valueNormalized = (value - _MinValue) / (_MaxValue-_MinValue);
+
+        return _AngleOfStart - (valueNormalized * totalAngleSize);
     }
 
     #endregion  // PRIVATE_METHODS
