@@ -77,6 +77,39 @@ public class MavMessage
         _msgToString += "end.\t<== " + doubleColone[0] + " // " + doubleColone[1] + "\n";
     }
 
+    public MavMessage(byte[] _requestMessage, DateTime _now)
+    {
+        _msgGeneratedTime = _now;
+
+        //byte[] msgBuffer = strToHexByte(_requestMessage);
+
+        _msgMavLink = new MAVLinkMessage(_requestMessage, _msgGeneratedTime); // 3rd check
+                                                                        //_msgMavLink = new MAVLinkMessage(msgBuffer); // 3rd check
+
+        _msgToString = "DateTime // " + _msgGeneratedTime.ToString("yyyyMMddThhmmssfff") + " // ";
+        _msgToString += "msgID: " + _msgMavLink.msgid + " // ";
+
+        if (_msgMavLink.msgtypename != null)
+        {
+            _msgToString += _msgMavLink.msgtypename.ToString() + " // ";
+
+            var _data = _msgMavLink.data;
+
+            foreach (var _tempField in _data.GetType().GetFields())
+            {
+                FieldInfo _tempFieldInfo = _tempField;
+                string fieldName = _tempFieldInfo.Name;
+
+                var fieldValue = _tempFieldInfo.GetValue(_data);
+                var fieldUnit = GetUnit(_tempField.ToString(), msgid: _msgMavLink.msgid);
+
+                _msgToString += fieldName + ": " + fieldValue + " " + fieldUnit + " // ";
+            }
+        }
+
+        _msgToString += "end.\t<== " + _msgGeneratedTime + " // " + hexByteToStr(_requestMessage) + "\n";
+    }
+
     public byte[] strToHexByte(string hexString)
     {
         byte[] returnBytes = new byte[hexString.Length / 2];
@@ -97,6 +130,17 @@ public class MavMessage
 
         return returnBytes;
     }
+    public string hexByteToStr(byte[] hex)
+    {
+        string result = string.Empty;
+        foreach (byte _tempByte in hex)
+        {
+            result += _tempByte.ToString("x2").ToUpper();
+        }
+        return result;
+    }
+
+    ~MavMessage() { }
 }
 
 public class MsgGroup
@@ -428,7 +472,22 @@ public class Bridge
 
         _fullAddress = _ipAddress + "/" + _hostNtargetAddress + '/' + _bridgeName;
 
-        _generatedTime = DateTime.ParseExact(_bridgeName, "yyyy_MM_dd_T_HH_mm", null);
+        Regex regex = new Regex(@"^yyyy_MM_dd_T_HH_mm");
+
+        if (regex.IsMatch(_bridgeName))
+        {
+            _generatedTime = DateTime.ParseExact(_bridgeName, "yyyy_MM_dd_T_HH_mm", null);
+        }
+        else
+        {
+            //http request 후, ct 를 추출 해야 함. 
+            //나중에 작성 필요.
+            //현재는, 현재 시간으로 임시 사용함.
+            //Disarm 일 때는 _generatedTime 에 관련한 기능을 쓰지 않을 것이기 때문에, 급하게 필요하지 않음.
+
+            _generatedTime = DateTime.Now;
+        }
+
         _existNewMsgGroup = true;
 
         _msgGroups = new List<MsgGroup>();
@@ -438,7 +497,6 @@ public class Bridge
     {
         if (_httpResultBefore != _accessResult)
         {
-
             _httpResult = _accessResult;
             string _uril_txt = _accessResult.Substring(_accessResult.IndexOf("m2m:uril") + 11);
             string _untailed_txt = _uril_txt.Substring(0, _uril_txt.Length - 2);
@@ -487,6 +545,7 @@ public class Base
     private DateTime _generatedTime;
 
     private List<Bridge> _bridges;
+    private Bridge _disarmBridge;
     private Bridge _lastBridge;
 
     private bool _existNewBridge;
@@ -542,6 +601,14 @@ public class Base
         get
         {
             return _bridges;
+        }
+    }
+
+    public Bridge Disarm
+    {
+        get
+        {
+            return _disarmBridge;
         }
     }
 
@@ -694,11 +761,14 @@ public class Base
                         AddBridge(_newBridgeName);
                     }
                 }
+                else if (_newBridgeName == "disarm")
+                {
+                    _disarmBridge = new Bridge(_ipAddress, _hostAddress + "/" + _targetName, _newBridgeName);
+                }
             }
         }
         _httpResultBefore = _httpResult;
         _lastBridge = _bridges[_bridges.Count - 1];
     }
 }
-
 
