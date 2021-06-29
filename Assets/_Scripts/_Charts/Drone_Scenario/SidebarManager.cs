@@ -25,9 +25,6 @@ public class SidebarManager : MonoBehaviour
     #region PRIVATE_VARIABLES
 
     private float m_ServerData = 0f;
-    private float m_NeedleValue = 0f;
-    private float m_PreNeedleValue = 0f;
-    private float m_CurrentNeedleValue = 0f;
 
     private HTTP_Parser_v01 m_Parser;
     private ParserManager m_ParserManager;
@@ -76,8 +73,6 @@ public class SidebarManager : MonoBehaviour
                 // # 1. Get data from SERVER
                 _Indicators[0].text = string.Format("{0}", GetGPS(EDroneChartType.Latitude));
                 _Indicators[1].text = string.Format("{0}", GetGPS(EDroneChartType.Longitude));
-                Debug.Log("latitude: " + GetGPS(EDroneChartType.Latitude));
-                Debug.Log("longitude: " + GetGPS(EDroneChartType.Longitude));
             }
 
             yield return new WaitForSeconds(_RefreshTime);
@@ -87,7 +82,7 @@ public class SidebarManager : MonoBehaviour
     private string GetGPS(EDroneChartType chart)
     {
         var data = m_ParserManager.GetParsingDataOf(chart);
-        string text = Convert.ToString(data);
+        string text = data.ToString("F0");  // no decimal
 
         string degree = "";
         string min = "";
