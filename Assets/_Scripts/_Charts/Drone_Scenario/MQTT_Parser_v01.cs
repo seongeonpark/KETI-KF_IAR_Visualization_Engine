@@ -102,7 +102,7 @@ public class MQTT_Parser_v01 : MonoBehaviour
         if(newMsgFlag)
         {
             MavMessage _tempMavMsg = new MavMessage(messageByteArray, DateTime.UtcNow.AddMinutes(-2));
-            Debug.Log(_tempMavMsg.MsgToString);
+            //Debug.Log(_tempMavMsg.MsgToString);
             if (MAVLINK_MESSAGE_INFOS.GetMessageInfo(_tempMavMsg.MsgMavLink.msgid).name != null)
             {
                 switch (_tempMavMsg.MsgMavLink.msgid)

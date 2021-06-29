@@ -804,23 +804,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 214349983}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78f70ae9acaa7274693a9a2031510527, type: 3}
+  m_Script: {fileID: 11500000, guid: bc661c8a97c6dcd4ea493a1a7219bb57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requestURL_IP: http://203.253.128.177:7579
-  requestURL_HOST: Mobius/KETI_MUV/Drone_Data
-  requestURL_TARGETNAME: UMACAir11
-  repeatTime: 60
-  _out_alt: 
-  _out_alt_relative: 
-  _out_airspeed: []
+  basemodeChk: 0
+  _out_battery: 
   _out_roll: []
   _out_pitch: []
   _out_yaw: []
   _out_lat: 
   _out_lon: 
-  _out_currentbattery: 
-  _out_remainbattery: 
+  _out_alt: 
+  _out_alt_relative: 
+  _out_arm_or_disarm: 0
+  test_bridge: Dev_Tool_Test
+  updateCnt: 0
+  chkCnt: 1000
 --- !u!4 &214349985
 Transform:
   m_ObjectHideFlags: 0
@@ -1053,7 +1052,7 @@ MonoBehaviour:
   _AngleOfEnd: -360
   _MinValue: 0
   _MaxValue: 360
-  _Http_Parser: {fileID: 1666453877}
+  _Parser: {fileID: 214349983}
   _RefreshTime: 3
   _OutputData: 0
   _IsTest: 0
@@ -1370,7 +1369,7 @@ MonoBehaviour:
   _AngleOfEnd: -75
   _MinValue: 4
   _MaxValue: 24
-  _Http_Parser: {fileID: 1666453877}
+  _Parser: {fileID: 1666453877}
   _RefreshTime: 3
   _OutputData: 0
   _IsTest: 0
@@ -1453,7 +1452,7 @@ MonoBehaviour:
   _AngleOfEnd: -360
   _MinValue: 0
   _MaxValue: 240
-  _Http_Parser: {fileID: 1666453877}
+  _Parser: {fileID: 1666453877}
   _RefreshTime: 3
   _OutputData: 0
   _IsTest: 0
@@ -1651,7 +1650,7 @@ MonoBehaviour:
   _Indicators:
   - {fileID: 865877628}
   - {fileID: 1714229090}
-  _Http_Parser: {fileID: 1666453877}
+  _Parser: {fileID: 214349983}
   _RefreshTime: 3
   _IsTest: 0
   _TestValue: 0
@@ -3612,7 +3611,7 @@ MonoBehaviour:
   _AngleOfEnd: -360
   _MinValue: 0
   _MaxValue: 240
-  _Http_Parser: {fileID: 0}
+  _Parser: {fileID: 0}
   _RefreshTime: 3
   _OutputData: 0
   _IsTest: 0
@@ -4167,7 +4166,7 @@ MonoBehaviour:
   _PosOfEnd: 215
   _MinValue: 0
   _MaxValue: 250
-  _Http_Parser: {fileID: 1666453877}
+  _Parser: {fileID: 214349983}
   _RefreshTime: 3
   _OutputData: 0
   _IsTest: 0
@@ -4854,7 +4853,7 @@ MonoBehaviour:
   _AngleOfEnd: -75
   _MinValue: 0
   _MaxValue: 100
-  _Http_Parser: {fileID: 1666453877}
+  _Parser: {fileID: 1666453877}
   _RefreshTime: 3
   _OutputData: 0
   _IsTest: 0
@@ -5806,7 +5805,7 @@ MonoBehaviour:
   _AngleOfEnd: -90
   _MinValue: -90
   _MaxValue: 90
-  _Http_Parser: {fileID: 1666453877}
+  _Parser: {fileID: 214349983}
   _RefreshTime: 3
   _OutputData: 0
   _IsTest: 0
@@ -7101,7 +7100,7 @@ MonoBehaviour:
   _PosOfEnd: -15
   _MinValue: -30
   _MaxValue: 30
-  _Http_Parser: {fileID: 1666453877}
+  _Parser: {fileID: 214349983}
   _RefreshTime: 3
   _OutputData: 0
   _IsTest: 0
@@ -7127,7 +7126,7 @@ MonoBehaviour:
   _AngleOfEnd: -90
   _MinValue: -90
   _MaxValue: 90
-  _Http_Parser: {fileID: 1666453877}
+  _Parser: {fileID: 214349983}
   _RefreshTime: 3
   _OutputData: 0
   _IsTest: 0

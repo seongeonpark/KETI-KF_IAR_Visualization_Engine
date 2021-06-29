@@ -22,7 +22,7 @@ public class VerticalScope : MonoBehaviour
     [SerializeField] private float _MaxValue;
 
     [Header("Data:")]
-    [SerializeField] private GameObject _Http_Parser;
+    [SerializeField] private GameObject _Parser;
     [SerializeField] private float _RefreshTime;
     [SerializeField] private float _OutputData;
 
@@ -36,7 +36,8 @@ public class VerticalScope : MonoBehaviour
 
     #region PRIVATE_VARIABLES
 
-    private HTTP_Parser_v01 m_Parser;
+    private HTTP_Parser_v01 m_HTTP;
+    private MQTT_Parser_v01 m_MQTT;
     private ParserManager m_ParserManager;
 
     private float m_ServerData = 0f;
@@ -54,8 +55,17 @@ public class VerticalScope : MonoBehaviour
 
     private void Awake()
     {
-        m_Parser = _Http_Parser.GetComponent<HTTP_Parser_v01>();
-        m_ParserManager = new ParserManager(m_Parser);
+        m_HTTP = _Parser.GetComponent<HTTP_Parser_v01>();
+        m_MQTT = _Parser.GetComponent<MQTT_Parser_v01>();
+
+        if (m_HTTP)
+        {
+            m_ParserManager = new ParserManager(m_HTTP);
+        }
+        else if (m_MQTT)
+        {
+            m_ParserManager = new ParserManager(m_MQTT);
+        }
     }
 
     private void Start()
