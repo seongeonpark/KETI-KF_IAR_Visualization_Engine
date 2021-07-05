@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -27,7 +26,7 @@ public class SidebarManager : MonoBehaviour
     private float m_ServerData = 0f;
 
     private HTTP_Parser_v01 m_HTTP;
-    private MQTT_Parser_v01 m_MQTT;
+    private MQTT_Parser_v011 m_MQTT;
     private ParserManager m_ParserManager;
 
     private bool m_IsReady = false;
@@ -40,7 +39,7 @@ public class SidebarManager : MonoBehaviour
     private void Awake()
     {
         m_HTTP = _Parser.GetComponent<HTTP_Parser_v01>();
-        m_MQTT = _Parser.GetComponent<MQTT_Parser_v01>();
+        m_MQTT = _Parser.GetComponent<MQTT_Parser_v011>();
 
         if (m_HTTP)
         {

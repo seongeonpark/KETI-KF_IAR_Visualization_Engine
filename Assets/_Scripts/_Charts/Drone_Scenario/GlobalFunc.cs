@@ -9,6 +9,8 @@ using static MAVLink;
 using System.Xml;
 using System.Text.RegularExpressions;
 
+using UnityEngine;
+
 public class MavMessage
 {
     private MAVLinkMessage _msgMavLink;
@@ -44,16 +46,16 @@ public class MavMessage
         string[] doubleColone = _requestedMessage.Split(new string[] { @""":""" }, StringSplitOptions.None); // 1st check
 
         doubleColone[0] = doubleColone[0].Replace("\"", "");
-        doubleColone[1] = doubleColone[1].Replace("\"", "");
+        doubleColone[0] = doubleColone[0].Replace(" ", "");
 
-        _msgGeneratedTime = DateTime.ParseExact(doubleColone[0], "yyyy-MM-ddThh:mm:ssfff", null); // 2nd check
-
+        _msgGeneratedTime = DateTime.ParseExact(doubleColone[0], "yyyy-MM-ddTHH:mm:ssfff", null); // 2nd check
+        
         byte[] msgBuffer = strToHexByte(doubleColone[1]);
 
         _msgMavLink = new MAVLinkMessage(msgBuffer, _msgGeneratedTime); // 3rd check
                                                                         //_msgMavLink = new MAVLinkMessage(msgBuffer); // 3rd check
 
-        _msgToString = "DateTime // " + _msgGeneratedTime.ToString("yyyyMMddThhmmssfff") + " // ";
+        _msgToString = "DateTime // " + _msgGeneratedTime.ToString("yyyyMMddTHHmmssfff") + " // ";
         _msgToString += "msgID: " + _msgMavLink.msgid + " // ";
 
         if (_msgMavLink.msgtypename != null)
@@ -86,7 +88,7 @@ public class MavMessage
         _msgMavLink = new MAVLinkMessage(_requestMessage, _msgGeneratedTime); // 3rd check
                                                                         //_msgMavLink = new MAVLinkMessage(msgBuffer); // 3rd check
 
-        _msgToString = "DateTime // " + _msgGeneratedTime.ToString("yyyyMMddThhmmssfff") + " // ";
+        _msgToString = "DateTime // " + _msgGeneratedTime.ToString("yyyyMMddTHHmmssfff") + " // ";
         _msgToString += "msgID: " + _msgMavLink.msgid + " // ";
 
         if (_msgMavLink.msgtypename != null)

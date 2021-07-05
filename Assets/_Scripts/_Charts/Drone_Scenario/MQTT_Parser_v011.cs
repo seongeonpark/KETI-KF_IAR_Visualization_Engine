@@ -15,43 +15,38 @@ using M2MqttUnity;
 
 using static MAVLink;
 
-public class MQTT_Parser_v01 : MonoBehaviour
+public class MQTT_Parser_v011 : MonoBehaviour
 {
     private MqttClient client;
     string msg;
 
-    private List<mavlink_attitude_t> _list_attitude;
-    private List<mavlink_global_position_int_t> _list_globalPosition;
-    private List<mavlink_heartbeat_t> _list_heartbeat;
-    private List<mavlink_sys_status_t> _list_systemStatus;
+    public string test_bridge = "Dev_Tool_Test";
+
+    public int updateCnt;
+    public int chkCnt = 1000;
 
     public byte basemodeChk;
 
     public List<ushort> _out_battery;
 
-    public List<float> _out_roll;
-    public List<float> _out_pitch;
-    public List<float> _out_yaw;
+    public List<int> _out_alt, _out_alt_relative;
+    public List<float> _out_airspeed;
+    public List<float> _out_roll, _out_pitch, _out_yaw;
+    public List<int> _out_lat, _out_lon;
 
-    public List<int> _out_lat;
-    public List<int> _out_lon;
-    public List<int> _out_alt;
-    public List<int> _out_alt_relative;
+    public List<short> _out_currentbattery;
+    public List<sbyte> _out_remainbattery;
 
     public bool _out_arm_or_disarm;
 
-    public string test_bridge = "Dev_Tool_Test";
+    public List<short> _out_xacc, _out_yacc, _out_zacc;
+    public List<short> _out_xgyro, _out_ygyro, _out_zgyro;
+    public List<short> _out_xmag, _out_ymag, _out_zmag;
 
     string clientId;
     byte[] messageByteArray;
-    byte[] msgBA_before;
 
     bool newMsgFlag = false;
-
-    
-
-    public int updateCnt;
-    public int chkCnt = 1000;
 
     // Use this for initialization
     void Start()
@@ -69,10 +64,14 @@ public class MQTT_Parser_v01 : MonoBehaviour
         _out_alt = new List<int>();
         _out_alt_relative = new List<int>();
 
-        _list_attitude = new List<mavlink_attitude_t>();
-        _list_heartbeat = new List<mavlink_heartbeat_t>();
-        _list_systemStatus = new List<mavlink_sys_status_t>();
-        _list_globalPosition = new List<mavlink_global_position_int_t>();
+        _out_airspeed = new List<float>();
+
+        _out_currentbattery = new List<short>();
+        _out_remainbattery = new List<sbyte>();
+
+        _out_xacc = new List<short>(); _out_yacc = new List<short>(); _out_zacc = new List<short>();
+        _out_xgyro = new List<short>(); _out_ygyro = new List<short>(); _out_zgyro = new List<short>();
+        _out_xmag = new List<short>(); _out_ymag = new List<short>(); _out_zmag = new List<short>();
 
         // create client instance 
         client = new MqttClient("203.253.128.177", 1883, false, null, null, MqttSslProtocols.None);
@@ -99,6 +98,8 @@ public class MQTT_Parser_v01 : MonoBehaviour
 
     private void Update()
     {
+        int _timeseries_limit = 10;
+
         if(newMsgFlag)
         {
             MavMessage _tempMavMsg = new MavMessage(messageByteArray, DateTime.UtcNow.AddMinutes(-2));
@@ -109,9 +110,6 @@ public class MQTT_Parser_v01 : MonoBehaviour
                 {
                     case 0: //heartbeat
                         var heartbeatResult = convert_heartbeat(_tempMavMsg.MsgMavLink);
-                        _list_heartbeat.Add(heartbeatResult);
-
-                        if (_list_heartbeat.Count > 10) { _list_heartbeat.RemoveAt(0); }
                         
                         basemodeChk = heartbeatResult.base_mode;
 
@@ -121,41 +119,80 @@ public class MQTT_Parser_v01 : MonoBehaviour
 
                     case 1: //system_status
                         var systemstatusResult = convert_systemstatus(_tempMavMsg.MsgMavLink);
-                        _list_systemStatus.Add(systemstatusResult);
-                        if (_list_heartbeat.Count > 10) { _list_systemStatus.RemoveAt(0); }
 
                         _out_battery.Add(systemstatusResult.voltage_battery);
-                        if (_out_battery.Count > 10) { _out_battery.RemoveAt(0); }
+                        if (_out_battery.Count > _timeseries_limit) { _out_battery.RemoveAt(0); }
+
+                        break;
+
+                    case 27: //raw_imu
+                        var rawimuResult = convert_rawimu(_tempMavMsg.MsgMavLink);
+
+                        _out_xacc.Add(rawimuResult.xacc);
+                        _out_yacc.Add(rawimuResult.yacc);
+                        _out_zacc.Add(rawimuResult.zacc);
+                        if (_out_xacc.Count > _timeseries_limit) { _out_xacc.RemoveAt(0); }
+                        if (_out_yacc.Count > _timeseries_limit) { _out_yacc.RemoveAt(0); }
+                        if (_out_zacc.Count > _timeseries_limit) { _out_zacc.RemoveAt(0); }
+
+                        _out_xgyro.Add(rawimuResult.xgyro);
+                        _out_ygyro.Add(rawimuResult.ygyro);
+                        _out_zgyro.Add(rawimuResult.zgyro);
+                        if (_out_xgyro.Count > _timeseries_limit) { _out_xgyro.RemoveAt(0); }
+                        if (_out_ygyro.Count > _timeseries_limit) { _out_ygyro.RemoveAt(0); }
+                        if (_out_zgyro.Count > _timeseries_limit) { _out_zgyro.RemoveAt(0); }
+
+                        _out_xmag.Add(rawimuResult.xmag);
+                        _out_ymag.Add(rawimuResult.ymag);
+                        _out_zmag.Add(rawimuResult.zmag);
+                        if (_out_xmag.Count > _timeseries_limit) { _out_xmag.RemoveAt(0); }
+                        if (_out_ymag.Count > _timeseries_limit) { _out_ymag.RemoveAt(0); }
+                        if (_out_zmag.Count > _timeseries_limit) { _out_zmag.RemoveAt(0); }
 
                         break;
 
                     case 30: //attitude
                         var attitudeResult = convert_attitude(_tempMavMsg.MsgMavLink);
-                        _list_attitude.Add(attitudeResult);
-                        if (_list_attitude.Count > 10) { _list_attitude.RemoveAt(0); }
 
                         _out_roll.Add(attitudeResult.roll);
                         _out_pitch.Add(attitudeResult.pitch);
                         _out_yaw.Add(attitudeResult.yaw);
-                        if (_out_roll.Count > 10) { _out_roll.RemoveAt(0); }
-                        if (_out_pitch.Count > 10) { _out_pitch.RemoveAt(0); }
-                        if (_out_yaw.Count > 10) { _out_yaw.RemoveAt(0); }
+                        if (_out_roll.Count > _timeseries_limit) { _out_roll.RemoveAt(0); }
+                        if (_out_pitch.Count > _timeseries_limit) { _out_pitch.RemoveAt(0); }
+                        if (_out_yaw.Count > _timeseries_limit) { _out_yaw.RemoveAt(0); }
 
                         break;
 
                     case 33:
                         var globalpositionResult = convert_globalposition(_tempMavMsg.MsgMavLink);
-                        _list_globalPosition.Add(globalpositionResult);
-                        if (_list_globalPosition.Count > 10) { _list_globalPosition.RemoveAt(0); }
 
                         _out_lat.Add(globalpositionResult.lat);
                         _out_lon.Add(globalpositionResult.lon);
                         _out_alt.Add(globalpositionResult.alt);
                         _out_alt_relative.Add(globalpositionResult.relative_alt);
-                        if (_out_lat.Count > 10) { _out_lat.RemoveAt(0); }
-                        if (_out_lon.Count > 10) { _out_lon.RemoveAt(0); }
-                        if (_out_alt.Count > 10) { _out_alt.RemoveAt(0); }
-                        if (_out_alt_relative.Count > 10) { _out_alt_relative.RemoveAt(0); }
+                        if (_out_lat.Count > _timeseries_limit) { _out_lat.RemoveAt(0); }
+                        if (_out_lon.Count > _timeseries_limit) { _out_lon.RemoveAt(0); }
+                        if (_out_alt.Count > _timeseries_limit) { _out_alt.RemoveAt(0); }
+                        if (_out_alt_relative.Count > _timeseries_limit) { _out_alt_relative.RemoveAt(0); }
+
+                        break;
+
+                    case 74:
+                        var vfrhudResult = convert_vfrhud(_tempMavMsg.MsgMavLink);
+
+                        _out_airspeed.Add(vfrhudResult.airspeed);
+                        if (_out_airspeed.Count > _timeseries_limit) { _out_airspeed.RemoveAt(0); }
+
+                        break;
+
+                    case 147:
+                        var batterystatusResult = convert_batterystatus(_tempMavMsg.MsgMavLink);
+
+                        _out_remainbattery.Add(batterystatusResult.battery_remaining);
+                        _out_currentbattery.Add(batterystatusResult.current_battery);
+                        if (_out_remainbattery.Count > _timeseries_limit) { _out_remainbattery.RemoveAt(0); }
+                        if (_out_currentbattery.Count > _timeseries_limit) { _out_currentbattery.RemoveAt(0); }
+
                         break;
                 }
             }
@@ -427,8 +464,7 @@ public class MQTT_Parser_v01 : MonoBehaviour
             voltage_battery, current_battery, drop_rate_comm, errors_comm, errors_count1, errors_count2, errors_count3, errors_count4,
             battery_remaining);
     }
-
-    /*public mavlink_battery_status_t convert_batterystatus(MAVLinkMessage _msg)
+    public mavlink_battery_status_t convert_batterystatus(MAVLinkMessage _msg)
     {
         int current_consumed = 0;
         int energy_consumed = 0;
@@ -481,7 +517,106 @@ public class MQTT_Parser_v01 : MonoBehaviour
         }
 
         return new mavlink_battery_status_t(current_consumed, energy_consumed, temperature, voltages, current_battery, id, battery_function, type, battery_remaining);
-    }*/
+    }
+    public mavlink_vfr_hud_t convert_vfrhud(MAVLinkMessage _msg)
+    {
+        float airspeed = 0;
+        float groundspeed = 0;
+        float alt = 0;
+        float climb = 0;
+        short heading = 0;
+        ushort throttle = 0;
 
+        var _data = _msg.data;
+
+        foreach (var _tempField in _data.GetType().GetFields())
+        {
+            FieldInfo _tempFildInfo = _tempField;
+            string fieldName = _tempFildInfo.Name;
+            var fieldValue = _tempFildInfo.GetValue(_data);
+
+            switch (fieldName)
+            {
+                case "airspeed":
+                    airspeed = (float)fieldValue;
+                    break;
+                case "groundspeed":
+                    groundspeed = (float)fieldValue;
+                    break;
+                case "alt":
+                    alt = (float)fieldValue;
+                    break;
+                case "climb":
+                    climb = (float)fieldValue;
+                    break;
+                case "heading":
+                    heading = (short)fieldValue;
+                    break;
+                case "throttle":
+                    throttle = (ushort)fieldValue;
+                    break;
+            }
+        }
+
+        return new mavlink_vfr_hud_t(airspeed, groundspeed, alt, climb, heading, throttle);
+    }
+    public mavlink_raw_imu_t convert_rawimu(MAVLinkMessage _msg)
+    {
+        ulong time_usec = 0;
+        short xacc = 0;
+        short yacc = 0;
+        short zacc = 0;
+        short xgyro = 0;
+        short ygyro = 0;
+        short zgyro = 0;
+        short xmag = 0;
+        short ymag = 0;
+        short zmag = 0;
+
+        var _data = _msg.data;
+
+        foreach (var _tempField in _data.GetType().GetFields())
+        {
+            FieldInfo _tempFildInfo = _tempField;
+            string fieldName = _tempFildInfo.Name;
+            var fieldValue = _tempFildInfo.GetValue(_data);
+
+            switch (fieldName)
+            {
+                case "time_usec":
+                    time_usec = (ulong)fieldValue;
+                    break;
+                case "xacc":
+                    xacc = (short)fieldValue;
+                    break;
+                case "yacc":
+                    yacc = (short)fieldValue;
+                    break;
+                case "zacc":
+                    zacc = (short)fieldValue;
+                    break;
+                case "xgyro":
+                    xgyro = (short)fieldValue;
+                    break;
+                case "ygyro":
+                    ygyro = (short)fieldValue;
+                    break;
+                case "zgyro":
+                    zgyro = (short)fieldValue;
+                    break;
+                case "xmag":
+                    xmag = (short)fieldValue;
+                    break;
+                case "ymag":
+                    ymag = (short)fieldValue;
+                    break;
+                case "zmag":
+                    zmag = (short)fieldValue;
+                    break;
+            }
+        }
+
+        return new mavlink_raw_imu_t(time_usec, xacc, yacc, zacc, xgyro, ygyro, zgyro, xmag, ymag, zmag);
+    }
 
 }

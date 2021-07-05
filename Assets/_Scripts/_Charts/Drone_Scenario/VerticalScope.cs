@@ -37,7 +37,7 @@ public class VerticalScope : MonoBehaviour
     #region PRIVATE_VARIABLES
 
     private HTTP_Parser_v01 m_HTTP;
-    private MQTT_Parser_v01 m_MQTT;
+    private MQTT_Parser_v011 m_MQTT;
     private ParserManager m_ParserManager;
 
     private float m_ServerData = 0f;
@@ -56,7 +56,7 @@ public class VerticalScope : MonoBehaviour
     private void Awake()
     {
         m_HTTP = _Parser.GetComponent<HTTP_Parser_v01>();
-        m_MQTT = _Parser.GetComponent<MQTT_Parser_v01>();
+        m_MQTT = _Parser.GetComponent<MQTT_Parser_v011>();
 
         if (m_HTTP)
         {
