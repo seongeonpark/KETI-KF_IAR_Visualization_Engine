@@ -40,23 +40,23 @@ public class DroneAppManager : MonoBehaviour
         else if (m_IsReady)
         {
             // 실증..
-            m_Status = CheckDroneStatus();
+            //m_Status = CheckDroneStatus();
 
             // 테스트..
             //m_Status = _TestFlag;
 
-            if (m_Status == DroneStatus.DISARM)
-            {
-                m_ARDashboard.GetComponent<Canvas>().enabled = true;
-                m_2DDashboard.GetComponent<Canvas>().enabled = false;
+            //if (m_Status == DroneStatus.DISARM)
+            //{
+            //    m_ARDashboard.GetComponent<Canvas>().enabled = true;
+            //    m_2DDashboard.GetComponent<Canvas>().enabled = false;
 
-            }
-            else if (m_Status == DroneStatus.ARM)
-            {
-                m_ARDashboard.GetComponent<Canvas>().enabled = false;
-                m_2DDashboard.GetComponent<Canvas>().enabled = true;
+            //}
+            //else if (m_Status == DroneStatus.ARM)
+            //{
+            //    m_ARDashboard.GetComponent<Canvas>().enabled = false;
+            //    m_2DDashboard.GetComponent<Canvas>().enabled = true;
 
-            }
+            //}
         }
     }
 

@@ -3,7 +3,8 @@ using System;
 
 namespace Vuforia
 {
-    public class TargetTracker : MonoBehaviour, ITrackableEventHandler
+
+    public class Drone_TargetTracker : MonoBehaviour, ITrackableEventHandler
     {
         private TrackableBehaviour mTrackableBehaviour;
         public event Action OnTrackingFound = () => { };
@@ -33,7 +34,6 @@ namespace Vuforia
                 OnTrackingLost();
             }
         }
-
-
     }
 }
+
