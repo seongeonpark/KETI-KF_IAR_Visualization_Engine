@@ -14,7 +14,16 @@ public enum EDroneChartType
     // text indicators
     Altitude,
     Latitude,
-    Longitude
+    Longitude,
+    Accelerometer_x,
+    Accelerometer_y,
+    Accelerometer_z,
+    Gyroscope_x,
+    Gyroscope_y,
+    Gyroscope_z,
+    Magnetometer_x,
+    Magnetometer_y,
+    Magnetometer_z
 }
 
 public class ParserManager : MonoBehaviour
@@ -242,6 +251,60 @@ public class ParserManager : MonoBehaviour
                     return true;
                 }
                 else return false;
+            case EDroneChartType.Accelerometer_x:
+                if (0 < m_MQTT._out_xacc.Count)
+                {
+                    return true;
+                }
+                else return false;
+            case EDroneChartType.Accelerometer_y:
+                if (0 < m_MQTT._out_yacc.Count)
+                {
+                    return true;
+                }
+                else return false;
+            case EDroneChartType.Accelerometer_z:
+                if (0 < m_MQTT._out_zacc.Count)
+                {
+                    return true;
+                }
+                else return false;
+            case EDroneChartType.Gyroscope_x:
+                if (0 < m_MQTT._out_xgyro.Count)
+                {
+                    return true;
+                }
+                else return false;
+            case EDroneChartType.Gyroscope_y:
+                if (0 < m_MQTT._out_ygyro.Count)
+                {
+                    return true;
+                }
+                else return false;
+            case EDroneChartType.Gyroscope_z:
+                if (0 < m_MQTT._out_zgyro.Count)
+                {
+                    return true;
+                }
+                else return false;
+            case EDroneChartType.Magnetometer_x:
+                if (0 < m_MQTT._out_xmag.Count)
+                {
+                    return true;
+                }
+                else return false;
+            case EDroneChartType.Magnetometer_y:
+                if (0 < m_MQTT._out_ymag.Count)
+                {
+                    return true;
+                }
+                else return false;
+            case EDroneChartType.Magnetometer_z:
+                if (0 < m_MQTT._out_zmag.Count)
+                {
+                    return true;
+                }
+                else return false;
             default:
                 break;
         }
@@ -283,6 +346,33 @@ public class ParserManager : MonoBehaviour
                 break;
             case EDroneChartType.Longitude:
                 data = Convert.ToSingle(m_MQTT._out_lon[m_MQTT._out_lon.Count - 1]);
+                break;
+            case EDroneChartType.Accelerometer_x:
+                data = Convert.ToSingle(m_MQTT._out_xacc[m_MQTT._out_xacc.Count - 1]);
+                break;
+            case EDroneChartType.Accelerometer_y:
+                data = Convert.ToSingle(m_MQTT._out_yacc[m_MQTT._out_yacc.Count - 1]);
+                break;
+            case EDroneChartType.Accelerometer_z:
+                data = Convert.ToSingle(m_MQTT._out_zacc[m_MQTT._out_zacc.Count - 1]);
+                break;
+            case EDroneChartType.Gyroscope_x:
+                data = Convert.ToSingle(m_MQTT._out_xgyro[m_MQTT._out_xgyro.Count - 1]);
+                break;
+            case EDroneChartType.Gyroscope_y:
+                data = Convert.ToSingle(m_MQTT._out_ygyro[m_MQTT._out_ygyro.Count - 1]);
+                break;
+            case EDroneChartType.Gyroscope_z:
+                data = Convert.ToSingle(m_MQTT._out_zgyro[m_MQTT._out_zgyro.Count - 1]);
+                break;
+            case EDroneChartType.Magnetometer_x:
+                data = Convert.ToSingle(m_MQTT._out_xmag[m_MQTT._out_xmag.Count - 1]);
+                break;
+            case EDroneChartType.Magnetometer_y:
+                data = Convert.ToSingle(m_MQTT._out_ymag[m_MQTT._out_ymag.Count - 1]);
+                break;
+            case EDroneChartType.Magnetometer_z:
+                data = Convert.ToSingle(m_MQTT._out_zmag[m_MQTT._out_zmag.Count - 1]);
                 break;
             default:
                 data = 0;

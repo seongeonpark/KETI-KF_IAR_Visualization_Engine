@@ -124,11 +124,20 @@ public class DroneChart : MonoBehaviour
                 m_ServerData = m_ParserManager.GetParsingDataOf(_ChartType);
             }
 
+            if (_ChartType == EDroneChartType.HeadingIndicator)
+            {
+                if (m_ServerData < 0)
+                {
+                    m_ServerData = 360 + m_ServerData;
+                }
+            }
+
             // # 3. Pre-processing
             // .... initialization
             m_PreviousValue = m_CurrentValue;
             m_NeedleValue = m_PreviousValue;
             // .... normalization
+
             m_CurrentValue = Mathf.Clamp(m_ServerData, _MinValue, _MaxValue);
 
 

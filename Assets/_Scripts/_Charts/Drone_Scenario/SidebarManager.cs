@@ -8,8 +8,24 @@ public class SidebarManager : MonoBehaviour
 
     [SerializeField] private EDroneChartType _ChartType;
 
-    [Header("Indicators:")]
-    [SerializeField] private TextMeshProUGUI[] _Indicators;
+    [Header("GPS:")]
+    [SerializeField] private TextMeshProUGUI _Lat;
+    [SerializeField] private TextMeshProUGUI _Lon;
+
+    [Header("Accelerometer:")]
+    [SerializeField] private TextMeshProUGUI _XAcc;
+    [SerializeField] private TextMeshProUGUI _YAcc;
+    [SerializeField] private TextMeshProUGUI _ZAcc;
+
+    [Header("Gyroscope:")]
+    [SerializeField] private TextMeshProUGUI _XGyr;
+    [SerializeField] private TextMeshProUGUI _YGyr;
+    [SerializeField] private TextMeshProUGUI _ZGyr;
+    
+    [Header("Magnetometer:")]
+    [SerializeField] private TextMeshProUGUI _XMag;
+    [SerializeField] private TextMeshProUGUI _YMag;
+    [SerializeField] private TextMeshProUGUI _ZMag;
 
     [Header("Data:")]
     [SerializeField] private GameObject _Parser;
@@ -30,7 +46,7 @@ public class SidebarManager : MonoBehaviour
     private ParserManager m_ParserManager;
 
     private bool m_IsReady = false;
-
+    private bool m_IsIMUReady = false;
     #endregion  // PRIVATE_VARIABLES
 
 
@@ -62,6 +78,10 @@ public class SidebarManager : MonoBehaviour
         {
             m_IsReady = m_ParserManager.CheckConnection(_ChartType);
         }
+        if (!m_IsIMUReady)
+        {
+            m_IsIMUReady = m_ParserManager.CheckConnection(EDroneChartType.Accelerometer_x);
+        }
     }
 
     #endregion  // UNITY_MONOBEHAVIOUR_METHODS
@@ -80,8 +100,24 @@ public class SidebarManager : MonoBehaviour
             if (!_IsTest && m_IsReady)
             {
                 // # 1. Get data from SERVER
-                _Indicators[0].text = string.Format("{0}", GetGPS(EDroneChartType.Latitude));
-                _Indicators[1].text = string.Format("{0}", GetGPS(EDroneChartType.Longitude));
+                _Lat.text = string.Format("{0}", GetGPS(EDroneChartType.Latitude));
+                _Lon.text = string.Format("{0}", GetGPS(EDroneChartType.Longitude));
+                               
+            }
+
+            if (!_IsTest && m_IsIMUReady)
+            {
+                _XAcc.text = string.Format("{0,3}", m_ParserManager.GetParsingDataOf(EDroneChartType.Accelerometer_x));
+                _YAcc.text = string.Format("{0,3}", m_ParserManager.GetParsingDataOf(EDroneChartType.Accelerometer_y));
+                _ZAcc.text = string.Format("{0,3}", m_ParserManager.GetParsingDataOf(EDroneChartType.Accelerometer_z));
+                                              
+                _XGyr.text = string.Format("{0,3}", m_ParserManager.GetParsingDataOf(EDroneChartType.Gyroscope_x));
+                _YGyr.text = string.Format("{0,3}", m_ParserManager.GetParsingDataOf(EDroneChartType.Gyroscope_y));
+                _ZGyr.text = string.Format("{0,3}", m_ParserManager.GetParsingDataOf(EDroneChartType.Gyroscope_z));
+                                              
+                _XMag.text = string.Format("{0,3}", m_ParserManager.GetParsingDataOf(EDroneChartType.Magnetometer_x));
+                _YMag.text = string.Format("{0,3}", m_ParserManager.GetParsingDataOf(EDroneChartType.Magnetometer_y));
+                _ZMag.text = string.Format("{0,3}", m_ParserManager.GetParsingDataOf(EDroneChartType.Magnetometer_z));
             }
 
             yield return new WaitForSeconds(_RefreshTime);

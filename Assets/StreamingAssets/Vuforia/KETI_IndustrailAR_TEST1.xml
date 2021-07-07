@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
+    <ImageTarget name="DroneQR" size="228.000000 247.000000" />
     <ImageTarget name="Drone" size="800.000000 532.000000" />
     <ImageTarget name="2_press-machine" size="3300.000000 3900.000000" />
     <ImageTarget name="8_brewing-machine" size="674.000000 613.000000" />
