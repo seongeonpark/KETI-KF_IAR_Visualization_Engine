@@ -21,6 +21,7 @@ public class MQTT_Parser_v011 : MonoBehaviour
     string msg;
 
     public string test_bridge = "Dev_Tool_Test";
+    //public string test_bridge = "KETI_Air_01";
 
     public int updateCnt;
     public int chkCnt = 1000;
@@ -76,7 +77,7 @@ public class MQTT_Parser_v011 : MonoBehaviour
         // create client instance 
         client = new MqttClient("203.253.128.177", 1883, false, null, null, MqttSslProtocols.None);
         //client = new MqttClient("", 1883, false, null, null, MqttSslProtocols.None);
-        client.Settings.TimeoutOnReceiving = 100;
+        //client.Settings.TimeoutOnReceiving = 100;
         clientId = Guid.NewGuid().ToString();
         client.Connect(clientId);
 
@@ -88,7 +89,109 @@ public class MQTT_Parser_v011 : MonoBehaviour
     void client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
     {
         messageByteArray = e.Message;
-        newMsgFlag = true;
+
+        int _timeseries_limit = 3;
+
+        MavMessage _tempMavMsg = new MavMessage(messageByteArray, DateTime.UtcNow.AddMinutes(-2));
+        if (MAVLINK_MESSAGE_INFOS.GetMessageInfo(_tempMavMsg.MsgMavLink.msgid).name != null)
+        {
+            switch (_tempMavMsg.MsgMavLink.msgid)
+            {
+                case 0: //heartbeat
+                    var heartbeatResult = convert_heartbeat(_tempMavMsg.MsgMavLink);
+
+                    basemodeChk = heartbeatResult.base_mode;
+
+                    _out_arm_or_disarm = GetBit(basemodeChk, 8);
+
+                    break;
+
+                case 1: //system_status
+                    var systemstatusResult = convert_systemstatus(_tempMavMsg.MsgMavLink);
+
+                    _out_battery.Add((ushort)(systemstatusResult.voltage_battery * 0.001f));
+                    if (_out_battery.Count > _timeseries_limit) { _out_battery.RemoveAt(0); }
+
+                    break;
+
+                case 27: //raw_imu
+                    var rawimuResult = convert_rawimu(_tempMavMsg.MsgMavLink);
+
+                    _out_xacc.Add(rawimuResult.xacc);
+                    _out_yacc.Add(rawimuResult.yacc);
+                    _out_zacc.Add(rawimuResult.zacc);
+                    if (_out_xacc.Count > _timeseries_limit) { _out_xacc.RemoveAt(0); }
+                    if (_out_yacc.Count > _timeseries_limit) { _out_yacc.RemoveAt(0); }
+                    if (_out_zacc.Count > _timeseries_limit) { _out_zacc.RemoveAt(0); }
+
+                    _out_xgyro.Add(rawimuResult.xgyro);
+                    _out_ygyro.Add(rawimuResult.ygyro);
+                    _out_zgyro.Add(rawimuResult.zgyro);
+                    if (_out_xgyro.Count > _timeseries_limit) { _out_xgyro.RemoveAt(0); }
+                    if (_out_ygyro.Count > _timeseries_limit) { _out_ygyro.RemoveAt(0); }
+                    if (_out_zgyro.Count > _timeseries_limit) { _out_zgyro.RemoveAt(0); }
+
+                    _out_xmag.Add(rawimuResult.xmag);
+                    _out_ymag.Add(rawimuResult.ymag);
+                    _out_zmag.Add(rawimuResult.zmag);
+                    if (_out_xmag.Count > _timeseries_limit) { _out_xmag.RemoveAt(0); }
+                    if (_out_ymag.Count > _timeseries_limit) { _out_ymag.RemoveAt(0); }
+                    if (_out_zmag.Count > _timeseries_limit) { _out_zmag.RemoveAt(0); }
+
+                    break;
+
+                case 30: //attitude
+                    var attitudeResult = convert_attitude(_tempMavMsg.MsgMavLink);
+                    Debug.Log(_tempMavMsg.MsgToString);
+                    _out_roll.Add(attitudeResult.roll * 100.0f);
+                    _out_pitch.Add(attitudeResult.pitch * 100.0f);
+                    _out_yaw.Add(attitudeResult.yaw * 100.0f);
+                    if (_out_roll.Count > _timeseries_limit) { _out_roll.RemoveAt(0); }
+                    if (_out_pitch.Count > _timeseries_limit) { _out_pitch.RemoveAt(0); }
+                    if (_out_yaw.Count > _timeseries_limit) { _out_yaw.RemoveAt(0); }
+
+                    break;
+
+                case 33:
+                    var globalpositionResult = convert_globalposition(_tempMavMsg.MsgMavLink);
+
+                    _out_lat.Add(globalpositionResult.lat);
+                    _out_lon.Add(globalpositionResult.lon);
+                    _out_alt.Add((int)(globalpositionResult.alt / 3.28f * 0.01f));
+                    _out_alt_relative.Add(globalpositionResult.relative_alt);
+                    if (_out_lat.Count > _timeseries_limit) { _out_lat.RemoveAt(0); }
+                    if (_out_lon.Count > _timeseries_limit) { _out_lon.RemoveAt(0); }
+                    if (_out_alt.Count > _timeseries_limit) { _out_alt.RemoveAt(0); }
+                    if (_out_alt_relative.Count > _timeseries_limit) { _out_alt_relative.RemoveAt(0); }
+
+                    break;
+
+                case 74:
+                    var vfrhudResult = convert_vfrhud(_tempMavMsg.MsgMavLink);
+
+                    _out_airspeed.Add(vfrhudResult.airspeed * 10.0f);
+                    if (_out_airspeed.Count > _timeseries_limit) { _out_airspeed.RemoveAt(0); }
+
+                    break;
+
+                case 147:
+                    var batterystatusResult = convert_batterystatus(_tempMavMsg.MsgMavLink);
+
+                    _out_remainbattery.Add(batterystatusResult.battery_remaining);
+                    _out_currentbattery.Add(batterystatusResult.current_battery);
+                    if (_out_remainbattery.Count > _timeseries_limit) { _out_remainbattery.RemoveAt(0); }
+                    if (_out_currentbattery.Count > _timeseries_limit) { _out_currentbattery.RemoveAt(0); }
+
+                    break;
+            }
+
+        }
+
+        //         if (messageByteArray[5] == 30)
+        //         {
+        //             Debug.Log(messageByteArray[10] + "" + messageByteArray[11] + "" + messageByteArray[12] + "" + messageByteArray[13] + "");
+        //         }
+
     }
 
     public bool GetBit(byte b, int bitnumbner)
@@ -96,108 +199,215 @@ public class MQTT_Parser_v011 : MonoBehaviour
         return ((b & (1 << bitnumbner - 1)) != 0);
     }
 
+    void OnApplicationQuit()
+    {
+        client.Unsubscribe(new string[] { "/Mobius/KETI_MUV/Drone_Data/" + test_bridge + "/#" });
+        client.Disconnect();
+
+#if !UNITY_EDITOR
+                        System.Diagnostics.Process.GetCurrentProcess().Kill();
+#endif
+    }
+
     private void Update()
     {
-        int _timeseries_limit = 10;
+        int _timeseries_limit = 3;
 
-        if(newMsgFlag)
+        if (messageByteArray[5] == 30)
         {
-            MavMessage _tempMavMsg = new MavMessage(messageByteArray, DateTime.UtcNow.AddMinutes(-2));
-            //Debug.Log(_tempMavMsg.MsgToString);
-            if (MAVLINK_MESSAGE_INFOS.GetMessageInfo(_tempMavMsg.MsgMavLink.msgid).name != null)
-            {
-                switch (_tempMavMsg.MsgMavLink.msgid)
-                {
-                    case 0: //heartbeat
-                        var heartbeatResult = convert_heartbeat(_tempMavMsg.MsgMavLink);
-                        
-                        basemodeChk = heartbeatResult.base_mode;
 
-                        _out_arm_or_disarm = GetBit(basemodeChk, 8);
+            // Debug.Log(messageByteArray[10] + "" + messageByteArray[11] + "" + messageByteArray[12] + "" + messageByteArray[13] + "");
 
-                        break;
-
-                    case 1: //system_status
-                        var systemstatusResult = convert_systemstatus(_tempMavMsg.MsgMavLink);
-
-                        _out_battery.Add(systemstatusResult.voltage_battery);
-                        if (_out_battery.Count > _timeseries_limit) { _out_battery.RemoveAt(0); }
-
-                        break;
-
-                    case 27: //raw_imu
-                        var rawimuResult = convert_rawimu(_tempMavMsg.MsgMavLink);
-
-                        _out_xacc.Add(rawimuResult.xacc);
-                        _out_yacc.Add(rawimuResult.yacc);
-                        _out_zacc.Add(rawimuResult.zacc);
-                        if (_out_xacc.Count > _timeseries_limit) { _out_xacc.RemoveAt(0); }
-                        if (_out_yacc.Count > _timeseries_limit) { _out_yacc.RemoveAt(0); }
-                        if (_out_zacc.Count > _timeseries_limit) { _out_zacc.RemoveAt(0); }
-
-                        _out_xgyro.Add(rawimuResult.xgyro);
-                        _out_ygyro.Add(rawimuResult.ygyro);
-                        _out_zgyro.Add(rawimuResult.zgyro);
-                        if (_out_xgyro.Count > _timeseries_limit) { _out_xgyro.RemoveAt(0); }
-                        if (_out_ygyro.Count > _timeseries_limit) { _out_ygyro.RemoveAt(0); }
-                        if (_out_zgyro.Count > _timeseries_limit) { _out_zgyro.RemoveAt(0); }
-
-                        _out_xmag.Add(rawimuResult.xmag);
-                        _out_ymag.Add(rawimuResult.ymag);
-                        _out_zmag.Add(rawimuResult.zmag);
-                        if (_out_xmag.Count > _timeseries_limit) { _out_xmag.RemoveAt(0); }
-                        if (_out_ymag.Count > _timeseries_limit) { _out_ymag.RemoveAt(0); }
-                        if (_out_zmag.Count > _timeseries_limit) { _out_zmag.RemoveAt(0); }
-
-                        break;
-
-                    case 30: //attitude
-                        var attitudeResult = convert_attitude(_tempMavMsg.MsgMavLink);
-
-                        _out_roll.Add(attitudeResult.roll);
-                        _out_pitch.Add(attitudeResult.pitch);
-                        _out_yaw.Add(attitudeResult.yaw);
-                        if (_out_roll.Count > _timeseries_limit) { _out_roll.RemoveAt(0); }
-                        if (_out_pitch.Count > _timeseries_limit) { _out_pitch.RemoveAt(0); }
-                        if (_out_yaw.Count > _timeseries_limit) { _out_yaw.RemoveAt(0); }
-
-                        break;
-
-                    case 33:
-                        var globalpositionResult = convert_globalposition(_tempMavMsg.MsgMavLink);
-
-                        _out_lat.Add(globalpositionResult.lat);
-                        _out_lon.Add(globalpositionResult.lon);
-                        _out_alt.Add(globalpositionResult.alt);
-                        _out_alt_relative.Add(globalpositionResult.relative_alt);
-                        if (_out_lat.Count > _timeseries_limit) { _out_lat.RemoveAt(0); }
-                        if (_out_lon.Count > _timeseries_limit) { _out_lon.RemoveAt(0); }
-                        if (_out_alt.Count > _timeseries_limit) { _out_alt.RemoveAt(0); }
-                        if (_out_alt_relative.Count > _timeseries_limit) { _out_alt_relative.RemoveAt(0); }
-
-                        break;
-
-                    case 74:
-                        var vfrhudResult = convert_vfrhud(_tempMavMsg.MsgMavLink);
-
-                        _out_airspeed.Add(vfrhudResult.airspeed);
-                        if (_out_airspeed.Count > _timeseries_limit) { _out_airspeed.RemoveAt(0); }
-
-                        break;
-
-                    case 147:
-                        var batterystatusResult = convert_batterystatus(_tempMavMsg.MsgMavLink);
-
-                        _out_remainbattery.Add(batterystatusResult.battery_remaining);
-                        _out_currentbattery.Add(batterystatusResult.current_battery);
-                        if (_out_remainbattery.Count > _timeseries_limit) { _out_remainbattery.RemoveAt(0); }
-                        if (_out_currentbattery.Count > _timeseries_limit) { _out_currentbattery.RemoveAt(0); }
-
-                        break;
-                }
-            }
-            newMsgFlag = false;
+            //                 MavMessage _tempMavMsg = new MavMessage(messageByteArray, DateTime.UtcNow.AddMinutes(-2));
+            //                 if (MAVLINK_MESSAGE_INFOS.GetMessageInfo(_tempMavMsg.MsgMavLink.msgid).name != null)
+            //                 {
+            //                     switch (_tempMavMsg.MsgMavLink.msgid)
+            //                     {
+            //                         case 0: //heartbeat
+            //                             var heartbeatResult = convert_heartbeat(_tempMavMsg.MsgMavLink);
+            // 
+            //                             basemodeChk = heartbeatResult.base_mode;
+            // 
+            //                             _out_arm_or_disarm = GetBit(basemodeChk, 8);
+            // 
+            //                             break;
+            // 
+            //                         case 1: //system_status
+            //                             var systemstatusResult = convert_systemstatus(_tempMavMsg.MsgMavLink);
+            // 
+            //                             _out_battery.Add(systemstatusResult.voltage_battery);
+            //                             if (_out_battery.Count > _timeseries_limit) { _out_battery.RemoveAt(0); }
+            // 
+            //                             break;
+            // 
+            //                         case 27: //raw_imu
+            //                             var rawimuResult = convert_rawimu(_tempMavMsg.MsgMavLink);
+            // 
+            //                             _out_xacc.Add(rawimuResult.xacc);
+            //                             _out_yacc.Add(rawimuResult.yacc);
+            //                             _out_zacc.Add(rawimuResult.zacc);
+            //                             if (_out_xacc.Count > _timeseries_limit) { _out_xacc.RemoveAt(0); }
+            //                             if (_out_yacc.Count > _timeseries_limit) { _out_yacc.RemoveAt(0); }
+            //                             if (_out_zacc.Count > _timeseries_limit) { _out_zacc.RemoveAt(0); }
+            // 
+            //                             _out_xgyro.Add(rawimuResult.xgyro);
+            //                             _out_ygyro.Add(rawimuResult.ygyro);
+            //                             _out_zgyro.Add(rawimuResult.zgyro);
+            //                             if (_out_xgyro.Count > _timeseries_limit) { _out_xgyro.RemoveAt(0); }
+            //                             if (_out_ygyro.Count > _timeseries_limit) { _out_ygyro.RemoveAt(0); }
+            //                             if (_out_zgyro.Count > _timeseries_limit) { _out_zgyro.RemoveAt(0); }
+            // 
+            //                             _out_xmag.Add(rawimuResult.xmag);
+            //                             _out_ymag.Add(rawimuResult.ymag);
+            //                             _out_zmag.Add(rawimuResult.zmag);
+            //                             if (_out_xmag.Count > _timeseries_limit) { _out_xmag.RemoveAt(0); }
+            //                             if (_out_ymag.Count > _timeseries_limit) { _out_ymag.RemoveAt(0); }
+            //                             if (_out_zmag.Count > _timeseries_limit) { _out_zmag.RemoveAt(0); }
+            // 
+            //                             break;
+            // 
+            //                         case 30: //attitude
+            //                             var attitudeResult = convert_attitude(_tempMavMsg.MsgMavLink);
+            //                             Debug.Log(_tempMavMsg.MsgToString);
+            //                             _out_roll.Add(attitudeResult.roll * 100.0f);
+            //                             _out_pitch.Add(attitudeResult.pitch * 100.0f);
+            //                             _out_yaw.Add(attitudeResult.yaw * 100.0f);
+            //                             if (_out_roll.Count > _timeseries_limit) { _out_roll.RemoveAt(0); }
+            //                             if (_out_pitch.Count > _timeseries_limit) { _out_pitch.RemoveAt(0); }
+            //                             if (_out_yaw.Count > _timeseries_limit) { _out_yaw.RemoveAt(0); }
+            // 
+            //                             break;
+            // 
+            //                         case 33:
+            //                             var globalpositionResult = convert_globalposition(_tempMavMsg.MsgMavLink);
+            // 
+            //                             _out_lat.Add(globalpositionResult.lat);
+            //                             _out_lon.Add(globalpositionResult.lon);
+            //                             _out_alt.Add(globalpositionResult.alt);
+            //                             _out_alt_relative.Add(globalpositionResult.relative_alt);
+            //                             if (_out_lat.Count > _timeseries_limit) { _out_lat.RemoveAt(0); }
+            //                             if (_out_lon.Count > _timeseries_limit) { _out_lon.RemoveAt(0); }
+            //                             if (_out_alt.Count > _timeseries_limit) { _out_alt.RemoveAt(0); }
+            //                             if (_out_alt_relative.Count > _timeseries_limit) { _out_alt_relative.RemoveAt(0); }
+            // 
+            //                             break;
+            // 
+            //                         case 74:
+            //                             var vfrhudResult = convert_vfrhud(_tempMavMsg.MsgMavLink);
+            // 
+            //                             _out_airspeed.Add(vfrhudResult.airspeed);
+            //                             if (_out_airspeed.Count > _timeseries_limit) { _out_airspeed.RemoveAt(0); }
+            // 
+            //                             break;
+            // 
+            //                         case 147:
+            //                             var batterystatusResult = convert_batterystatus(_tempMavMsg.MsgMavLink);
+            // 
+            //                             _out_remainbattery.Add(batterystatusResult.battery_remaining);
+            //                             _out_currentbattery.Add(batterystatusResult.current_battery);
+            //                             if (_out_remainbattery.Count > _timeseries_limit) { _out_remainbattery.RemoveAt(0); }
+            //                             if (_out_currentbattery.Count > _timeseries_limit) { _out_currentbattery.RemoveAt(0); }
+            // 
+            //                             break;
+            //                     }
+            //                     
+            //                 }
+            //             MavMessage _tempMavMsg = new MavMessage(messageByteArray, DateTime.UtcNow.AddMinutes(-2));
+            //             
+            //             if (MAVLINK_MESSAGE_INFOS.GetMessageInfo(_tempMavMsg.MsgMavLink.msgid).name != null)
+            //             {
+            //                 switch (_tempMavMsg.MsgMavLink.msgid)
+            //                 {
+            //                     case 0: //heartbeat
+            //                         var heartbeatResult = convert_heartbeat(_tempMavMsg.MsgMavLink);
+            //                         
+            //                         basemodeChk = heartbeatResult.base_mode;
+            // 
+            //                         _out_arm_or_disarm = GetBit(basemodeChk, 8);
+            // 
+            //                         break;
+            // 
+            //                     case 1: //system_status
+            //                         var systemstatusResult = convert_systemstatus(_tempMavMsg.MsgMavLink);
+            // 
+            //                         _out_battery.Add(systemstatusResult.voltage_battery);
+            //                         if (_out_battery.Count > _timeseries_limit) { _out_battery.RemoveAt(0); }
+            // 
+            //                         break;
+            // 
+            //                     case 27: //raw_imu
+            //                         var rawimuResult = convert_rawimu(_tempMavMsg.MsgMavLink);
+            // 
+            //                         _out_xacc.Add(rawimuResult.xacc);
+            //                         _out_yacc.Add(rawimuResult.yacc);
+            //                         _out_zacc.Add(rawimuResult.zacc);
+            //                         if (_out_xacc.Count > _timeseries_limit) { _out_xacc.RemoveAt(0); }
+            //                         if (_out_yacc.Count > _timeseries_limit) { _out_yacc.RemoveAt(0); }
+            //                         if (_out_zacc.Count > _timeseries_limit) { _out_zacc.RemoveAt(0); }
+            // 
+            //                         _out_xgyro.Add(rawimuResult.xgyro);
+            //                         _out_ygyro.Add(rawimuResult.ygyro);
+            //                         _out_zgyro.Add(rawimuResult.zgyro);
+            //                         if (_out_xgyro.Count > _timeseries_limit) { _out_xgyro.RemoveAt(0); }
+            //                         if (_out_ygyro.Count > _timeseries_limit) { _out_ygyro.RemoveAt(0); }
+            //                         if (_out_zgyro.Count > _timeseries_limit) { _out_zgyro.RemoveAt(0); }
+            // 
+            //                         _out_xmag.Add(rawimuResult.xmag);
+            //                         _out_ymag.Add(rawimuResult.ymag);
+            //                         _out_zmag.Add(rawimuResult.zmag);
+            //                         if (_out_xmag.Count > _timeseries_limit) { _out_xmag.RemoveAt(0); }
+            //                         if (_out_ymag.Count > _timeseries_limit) { _out_ymag.RemoveAt(0); }
+            //                         if (_out_zmag.Count > _timeseries_limit) { _out_zmag.RemoveAt(0); }
+            // 
+            //                         break;
+            // 
+            //                     case 30: //attitude
+            //                         var attitudeResult = convert_attitude(_tempMavMsg.MsgMavLink);
+            //                         Debug.Log(_tempMavMsg.MsgToString);
+            //                         _out_roll.Add(attitudeResult.roll * 100.0f);
+            //                         _out_pitch.Add(attitudeResult.pitch * 100.0f);
+            //                         _out_yaw.Add(attitudeResult.yaw * 100.0f);
+            //                         if (_out_roll.Count > _timeseries_limit) { _out_roll.RemoveAt(0); }
+            //                         if (_out_pitch.Count > _timeseries_limit) { _out_pitch.RemoveAt(0); }
+            //                         if (_out_yaw.Count > _timeseries_limit) { _out_yaw.RemoveAt(0); }
+            // 
+            //                         break;
+            // 
+            //                     case 33:
+            //                         var globalpositionResult = convert_globalposition(_tempMavMsg.MsgMavLink);
+            // 
+            //                         _out_lat.Add(globalpositionResult.lat);
+            //                         _out_lon.Add(globalpositionResult.lon);
+            //                         _out_alt.Add(globalpositionResult.alt);
+            //                         _out_alt_relative.Add(globalpositionResult.relative_alt);
+            //                         if (_out_lat.Count > _timeseries_limit) { _out_lat.RemoveAt(0); }
+            //                         if (_out_lon.Count > _timeseries_limit) { _out_lon.RemoveAt(0); }
+            //                         if (_out_alt.Count > _timeseries_limit) { _out_alt.RemoveAt(0); }
+            //                         if (_out_alt_relative.Count > _timeseries_limit) { _out_alt_relative.RemoveAt(0); }
+            // 
+            //                         break;
+            // 
+            //                     case 74:
+            //                         var vfrhudResult = convert_vfrhud(_tempMavMsg.MsgMavLink);
+            // 
+            //                         _out_airspeed.Add(vfrhudResult.airspeed);
+            //                         if (_out_airspeed.Count > _timeseries_limit) { _out_airspeed.RemoveAt(0); }
+            // 
+            //                         break;
+            // 
+            //                     case 147:
+            //                         var batterystatusResult = convert_batterystatus(_tempMavMsg.MsgMavLink);
+            // 
+            //                         _out_remainbattery.Add(batterystatusResult.battery_remaining);
+            //                         _out_currentbattery.Add(batterystatusResult.current_battery);
+            //                         if (_out_remainbattery.Count > _timeseries_limit) { _out_remainbattery.RemoveAt(0); }
+            //                         if (_out_currentbattery.Count > _timeseries_limit) { _out_currentbattery.RemoveAt(0); }
+            // 
+            //                         break;
+            //                 }
         }
+        newMsgFlag = false;
+
         updateCnt++;
         if (updateCnt != 0 && updateCnt % chkCnt == 0)
         {
@@ -212,7 +422,7 @@ public class MQTT_Parser_v011 : MonoBehaviour
             client.Settings.TimeoutOnReceiving = 100;
             client.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
             client.Connect(clientId);
-            
+
             client.Subscribe(new string[] { "/Mobius/KETI_MUV/Drone_Data/" + test_bridge + "/#" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
             updateCnt = 0;
         }
