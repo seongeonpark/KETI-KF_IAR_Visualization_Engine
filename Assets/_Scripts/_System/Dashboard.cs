@@ -37,47 +37,47 @@ public class Dashboard : MonoBehaviour
 
     //}
 
-    private void Start()
-    {
-        _DeviceID.text = string.Format("{0}", _MQTT.test_bridge);
-        //    _mTxtMachine.text = GetObjName(_mRootObj);
+    //private void Start()
+    //{
+    //    _DeviceID.text = string.Format("{0}", _MQTT.test_bridge);
+    //    //    _mTxtMachine.text = GetObjName(_mRootObj);
 
-        m_ParserManager = new ParserManager(_MQTT);
+    //    m_ParserManager = new ParserManager(_MQTT);
 
-    }
+    //}
 
-    private void Update()
-    {
-        if (!m_IsReady)
-        {
-            m_IsReady = m_ParserManager.CheckConnection(EDroneChartType.Battery_remain);
-        }
-        else if (m_IsReady)
-        {
-            var remainBattery = m_ParserManager.GetParsingDataOf(EDroneChartType.Battery_remain);
-            var currentBattery = m_ParserManager.GetParsingDataOf(EDroneChartType.Battery_voltage);
+    //private void Update()
+    //{
+    //    if (!m_IsReady)
+    //    {
+    //        m_IsReady = m_ParserManager.CheckConnection(EDroneChartType.Battery_remain);
+    //    }
+    //    else if (m_IsReady)
+    //    {
+    //        var remainBattery = m_ParserManager.GetParsingDataOf(EDroneChartType.Battery_remain);
+    //        var currentBattery = m_ParserManager.GetParsingDataOf(EDroneChartType.Battery_voltage);
 
-            _RemainBattery.text = string.Format("{0} %", remainBattery);
-            _CurrentBattery.text = string.Format("{0}", currentBattery);
+    //        _RemainBattery.text = string.Format("{0} %", remainBattery);
+    //        _CurrentBattery.text = string.Format("{0}", currentBattery);
 
-            m_Status = CheckDroneStatus();
-            string droneActivity = "LANDING";
+    //        m_Status = CheckDroneStatus();
+    //        string droneActivity = "LANDING";
 
-            if (m_Status == DroneStatus.DISARM)
-            {
-                droneActivity = "LANDING";
-            }
-            else if (m_Status == DroneStatus.ARM)
-            {
-                droneActivity = "FLYING";
-            }
-            _Activity.text = string.Format("{0}", droneActivity);
-        }
+    //        if (m_Status == DroneStatus.DISARM)
+    //        {
+    //            droneActivity = "LANDING";
+    //        }
+    //        else if (m_Status == DroneStatus.ARM)
+    //        {
+    //            droneActivity = "FLYING";
+    //        }
+    //        _Activity.text = string.Format("{0}", droneActivity);
+    //    }
 
-        _DateTimeTMP.text = DateTime.Now.ToString("yyyy/MM/dd   HH:mm:ss");
-        //    _mTxtTime.text = DateTime.Now.ToString("yyyy/MM/dd   HH:mm:ss");
+    //    _DateTimeTMP.text = DateTime.Now.ToString("yyyy/MM/dd   HH:mm:ss");
+    //    //    _mTxtTime.text = DateTime.Now.ToString("yyyy/MM/dd   HH:mm:ss");
 
-    }
+    //}
 
     public DroneStatus CheckDroneStatus()
     {

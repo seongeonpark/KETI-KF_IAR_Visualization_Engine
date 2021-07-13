@@ -11,7 +11,7 @@ public class RadialProgressBar : MonoBehaviour
     [SerializeField] private float AnimationSpeed = 70f;
     [Header("Color")]
     [SerializeField] private Color Progressbar = new Color(0, 161, 255, 255);
-    [SerializeField] private Color ProgressbarBackground = new Color(190, 190, 190, 255);
+    [SerializeField] private Color ProgressbarBackground; /*= new Color(190, 190, 190, 255);*/
     [SerializeField] private Color Center = new Color(255, 255, 255, 255);
     [SerializeField] private Color Font = new Color(0, 161, 255, 255);
 

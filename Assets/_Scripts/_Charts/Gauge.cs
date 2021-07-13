@@ -10,6 +10,14 @@ public class Gauge : MonoBehaviour
     [Header("Graph Options: ")]
     [SerializeField] private float _NeedleSpeed = 100f;
 
+
+    [Space()]
+    [SerializeField] private float _AngleOfStart;
+    [SerializeField] private float _AngleOfEnd;
+
+    [Space()]
+    [SerializeField] private float _MinValue;
+    [SerializeField] private float _MaxValue;
     #endregion  // Inspector_Window_Variables
 
     //private GetXML XML;
@@ -57,7 +65,7 @@ public class Gauge : MonoBehaviour
             {
                 _mAmount += _NeedleSpeed * Time.deltaTime;
 
-                mNeedle.eulerAngles = new Vector3(0, 0, GetRotation());
+                mNeedle.eulerAngles = new Vector3(0, 0, GetRotation(_mAmount));
 
                 mTextIndicator.text = ((int)_mAmount / 2).ToString() + "%";
             }
@@ -68,12 +76,20 @@ public class Gauge : MonoBehaviour
 
     #region PRIVATE_METHODS
 
-    private float GetRotation()
-    {
-        float totalAngleSize = MIN_GAUGE_ANGLE - MAX_GAUGE_ANGLE;
-        float speedNormalized = _mAmount / GAUGE_MAX;
+    //private float GetRotation()
+    //{
+    //    float totalAngleSize = MIN_GAUGE_ANGLE - MAX_GAUGE_ANGLE;
+    //    float speedNormalized = _mAmount / GAUGE_MAX;
 
-        return MIN_GAUGE_ANGLE - speedNormalized * totalAngleSize;
+    //    return MIN_GAUGE_ANGLE - speedNormalized * totalAngleSize;
+    //}
+
+    private float GetRotation(float value)
+    {
+        float totalAngleSize = Mathf.Abs(_AngleOfStart - _AngleOfEnd);
+        float valueNormalized = (value - _MinValue) / (_MaxValue - _MinValue);
+
+        return _AngleOfStart - (valueNormalized * totalAngleSize);
     }
 
     private IEnumerator UpdateGraph()
