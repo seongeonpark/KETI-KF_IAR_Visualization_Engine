@@ -1548,7 +1548,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _IoTType: 2
-  _IsVerticalType: 0
   _Needle: {fileID: 129056688}
   _NeedleSpeed: 150
   _RefreshTime: 0.3
@@ -1560,8 +1559,7 @@ MonoBehaviour:
   _AngleOfEnd: -360
   _PosOfStart: 0
   _PosOfEnd: 0
-  _IsTest: 0
-  _TestValue: 0
+  _IsVerticalType: 0
 --- !u!114 &219808578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1577,6 +1575,8 @@ MonoBehaviour:
   _Parser: {fileID: 214349983}
   _RefreshTime: 0.3
   _Chart: {fileID: 219808577}
+  _IsTest: 0
+  _TestValue: 0
 --- !u!1 &238364410
 GameObject:
   m_ObjectHideFlags: 0
@@ -1845,7 +1845,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _IoTType: 6
-  _IsVerticalType: 0
   _Needle: {fileID: 1355252946}
   _NeedleSpeed: 150
   _RefreshTime: 0.3
@@ -1857,8 +1856,7 @@ MonoBehaviour:
   _AngleOfEnd: -75
   _PosOfStart: 0
   _PosOfEnd: 0
-  _IsTest: 0
-  _TestValue: 0
+  _IsVerticalType: 0
 --- !u!114 &261966227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1874,6 +1872,8 @@ MonoBehaviour:
   _Parser: {fileID: 214349983}
   _RefreshTime: 0.3
   _Chart: {fileID: 261966226}
+  _IsTest: 0
+  _TestValue: 0
 --- !u!1 &332119912
 GameObject:
   m_ObjectHideFlags: 0
@@ -1956,7 +1956,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _IoTType: 1
-  _IsVerticalType: 0
   _Needle: {fileID: 388149153}
   _NeedleSpeed: 150
   _RefreshTime: 0.3
@@ -1968,8 +1967,7 @@ MonoBehaviour:
   _AngleOfEnd: -360
   _PosOfStart: 0
   _PosOfEnd: 0
-  _IsTest: 0
-  _TestValue: 0
+  _IsVerticalType: 0
 --- !u!114 &352759184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1985,6 +1983,8 @@ MonoBehaviour:
   _Parser: {fileID: 214349983}
   _RefreshTime: 0.3
   _Chart: {fileID: 352759183}
+  _IsTest: 0
+  _TestValue: 0
 --- !u!1 &371655349
 GameObject:
   m_ObjectHideFlags: 0
@@ -4250,28 +4250,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e497712bf4be25d4896b62d39f21fcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ChartType: 1
-  _Needle: {fileID: 239794828}
-  _NeedleSpeed: 150
-  _Text: {fileID: 2012348532}
-  _TextUnit: 
-  _AngleOfStart: 0
-  _AngleOfEnd: -360
-  _MinValue: 0
-  _MaxValue: 240
-  _Parser: {fileID: 214349983}
-  _RefreshTime: 3
-  _OutputData: 0
-  _IsTest: 0
-  _TestValue: 90
-  m_HTTP: {fileID: 0}
-  m_MQTT: {fileID: 0}
-  m_ParserManager: {fileID: 0}
-  m_ServerData: 0
-  m_NeedleValue: 0
-  m_PreviousValue: 0
-  m_CurrentValue: 0
-  m_IsReady: 0
 --- !u!1 &938644095
 GameObject:
   m_ObjectHideFlags: 0
@@ -5004,7 +4982,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1191543178}
-  - component: {fileID: 1191543179}
+  - component: {fileID: 1191543181}
+  - component: {fileID: 1191543180}
   m_Layer: 5
   m_Name: Altitude
   m_TagString: Untagged
@@ -5035,7 +5014,7 @@ RectTransform:
   m_AnchoredPosition: {x: 750, y: -10}
   m_SizeDelta: {x: 100, y: 0.4}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1191543179
+--- !u!114 &1191543180
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5044,22 +5023,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 1191543177}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef8f2ca8561ca8c46a4812934ad9270c, type: 3}
+  m_Script: {fileID: 11500000, guid: 94da43b4dc5ce4b47acf10f345b55fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ChartType: 7
+  _IoTType: 7
   _Needle: {fileID: 0}
   _NeedleSpeed: 50
+  _RefreshTime: 0.3
   _Text: {fileID: 938644097}
   _TextUnit: ft
-  _PosOfStart: -215
-  _PosOfEnd: 215
   _MinValue: 0
   _MaxValue: 500
+  _AngleOfStart: 0
+  _AngleOfEnd: 0
+  _PosOfStart: -215
+  _PosOfEnd: 215
+  _IsVerticalType: 0
+--- !u!114 &1191543181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191543177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7acf8c7b24afd514cbeba35561c6475e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _Parser: {fileID: 214349983}
-  _RefreshTime: 3
-  _OutputData: 0
-  _IsTest: 0
+  _RefreshTime: 0.3
+  _Chart: {fileID: 1191543180}
+  _IsTest: 1
   _TestValue: 150
 --- !u!1 &1209703047
 GameObject:
@@ -5726,6 +5721,8 @@ MonoBehaviour:
   _Parser: {fileID: 214349983}
   _RefreshTime: 0.3
   _Chart: {fileID: 1378677055}
+  _IsTest: 0
+  _TestValue: 0
 --- !u!114 &1378677055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5739,7 +5736,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _IoTType: 0
-  _IsVerticalType: 0
   _Needle: {fileID: 1533206000}
   _NeedleSpeed: 150
   _RefreshTime: 0.3
@@ -5751,8 +5747,7 @@ MonoBehaviour:
   _AngleOfEnd: -75
   _PosOfStart: 0
   _PosOfEnd: 0
-  _IsTest: 0
-  _TestValue: 0
+  _IsVerticalType: 0
 --- !u!1 &1391045745
 GameObject:
   m_ObjectHideFlags: 0
@@ -6929,7 +6924,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _IoTType: 3
-  _IsVerticalType: 0
   _Needle: {fileID: 1984142801}
   _NeedleSpeed: 150
   _RefreshTime: 0.3
@@ -6941,8 +6935,7 @@ MonoBehaviour:
   _AngleOfEnd: -90
   _PosOfStart: 0
   _PosOfEnd: 0
-  _IsTest: 0
-  _TestValue: 0
+  _IsVerticalType: 0
 --- !u!114 &1554616362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6958,6 +6951,8 @@ MonoBehaviour:
   _Parser: {fileID: 214349983}
   _RefreshTime: 0.3
   _Chart: {fileID: 1554616361}
+  _IsTest: 0
+  _TestValue: 0
 --- !u!1 &1562643403
 GameObject:
   m_ObjectHideFlags: 0
@@ -8587,7 +8582,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _IoTType: 4
-  _IsVerticalType: 0
   _Needle: {fileID: 1932204882}
   _NeedleSpeed: 150
   _RefreshTime: 0.3
@@ -8599,8 +8593,7 @@ MonoBehaviour:
   _AngleOfEnd: -90
   _PosOfStart: 0
   _PosOfEnd: 0
-  _IsTest: 0
-  _TestValue: 0
+  _IsVerticalType: 0
 --- !u!114 &1770370838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8616,6 +8609,8 @@ MonoBehaviour:
   _Parser: {fileID: 214349983}
   _RefreshTime: 0.3
   _Chart: {fileID: 1770370837}
+  _IsTest: 0
+  _TestValue: 0
 --- !u!114 &1770370839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8629,7 +8624,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _IoTType: 5
-  _IsVerticalType: 1
   _Needle: {fileID: 239721147}
   _NeedleSpeed: 150
   _RefreshTime: 0.3
@@ -8641,8 +8635,7 @@ MonoBehaviour:
   _AngleOfEnd: 0
   _PosOfStart: 15
   _PosOfEnd: -15
-  _IsTest: 0
-  _TestValue: 0
+  _IsVerticalType: 1
 --- !u!114 &1770370840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8658,6 +8651,8 @@ MonoBehaviour:
   _Parser: {fileID: 214349983}
   _RefreshTime: 0.3
   _Chart: {fileID: 1770370839}
+  _IsTest: 0
+  _TestValue: 0
 --- !u!1 &1801120859
 GameObject:
   m_ObjectHideFlags: 0

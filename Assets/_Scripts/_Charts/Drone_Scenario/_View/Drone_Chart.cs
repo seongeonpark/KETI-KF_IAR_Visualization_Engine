@@ -74,14 +74,18 @@ public class Drone_Chart : MonoBehaviour
             m_NeedleValue = m_CurrentValue;
         }
 
-
-        if (!_IsVerticalType)
+       
+        // Needle
+        if (_Needle)
         {
-            _Needle.eulerAngles = new Vector3(0, 0, GetRotation(m_NeedleValue));
-        }
-        else if (_IsVerticalType)
-        {
-            _Needle.localPosition = new Vector3(0, GetPostion(m_NeedleValue), 0);
+            if (!_IsVerticalType)
+            {
+                _Needle.eulerAngles = new Vector3(0, 0, GetRotation(m_NeedleValue));
+            }
+            else if (_IsVerticalType)
+            {
+                _Needle.localPosition = new Vector3(0, GetPostion(m_NeedleValue), 0);
+            }
         }
 
         // Text indicator
@@ -89,6 +93,7 @@ public class Drone_Chart : MonoBehaviour
         {
             _Text.text = string.Format("{0:N0} {1}", m_NeedleValue, _TextUnit);
         }
+
 
     }
 
@@ -106,7 +111,7 @@ public class Drone_Chart : MonoBehaviour
             // .... initialization
             m_PreviousValue = m_CurrentValue;
             m_NeedleValue = m_PreviousValue;
-            
+
             // .... normalization
 
             m_CurrentValue = Mathf.Clamp(m_IoTData, _MinValue, _MaxValue);
