@@ -14,13 +14,13 @@ namespace Vuforia
         [SerializeField] private Canvas m_ARDashboard;
         [SerializeField] private Canvas m_2DDashboard;
 
-        private ParserManager m_ParserManager;
+        private Drone_Model m_DataModel;
         private bool m_IsReady = false;
 
 
         private void Awake()
         {
-            m_ParserManager = new ParserManager(_MQTT);
+            m_DataModel = new Drone_Model(_MQTT);
         }
 
         void Start()
@@ -34,7 +34,7 @@ namespace Vuforia
             // #1. Check configuration
             if (!m_IsReady)
             {
-                m_IsReady = m_ParserManager.CheckConnection(EDroneChartType.Battery_remain);
+                m_IsReady = m_DataModel.IsConnected(EDroneIoT.Battery_remain);
             }
         }
 

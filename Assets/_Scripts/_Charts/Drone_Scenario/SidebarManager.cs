@@ -6,7 +6,7 @@ public class SidebarManager : MonoBehaviour
 {
     #region Inspector_Window_Variables
 
-    [SerializeField] private EDroneChartType _ChartType;
+    [SerializeField] private EDroneIoT _ChartType;
 
     [Header("GPS:")]
     [SerializeField] private TextMeshProUGUI _Lat;
@@ -43,7 +43,7 @@ public class SidebarManager : MonoBehaviour
 
     private HTTP_Parser_v01 m_HTTP;
     private MQTT_Parser_v011 m_MQTT;
-    private ParserManager m_ParserManager;
+    private Drone_Model m_DataModel;
 
     private bool m_IsReady = false;
     private bool m_IsIMUReady = false;
@@ -59,11 +59,11 @@ public class SidebarManager : MonoBehaviour
 
         if (m_HTTP)
         {
-            m_ParserManager = new ParserManager(m_HTTP);
+            m_DataModel = new Drone_Model(m_HTTP);
         }
         else if (m_MQTT)
         {
-            m_ParserManager = new ParserManager(m_MQTT);
+            m_DataModel = new Drone_Model(m_MQTT);
         }
     }
 
@@ -76,11 +76,11 @@ public class SidebarManager : MonoBehaviour
     {
         if (!m_IsReady)
         {
-            m_IsReady = m_ParserManager.CheckConnection(_ChartType);
+            m_IsReady = m_DataModel.IsConnected(_ChartType);
         }
         if (!m_IsIMUReady)
         {
-            m_IsIMUReady = m_ParserManager.CheckConnection(EDroneChartType.Accelerometer_x);
+            m_IsIMUReady = m_DataModel.IsConnected(EDroneIoT.Accelerometer_x);
         }
     }
 
@@ -100,33 +100,33 @@ public class SidebarManager : MonoBehaviour
             if (!_IsTest && m_IsReady)
             {
                 // # 1. Get data from SERVER
-                _Lat.text = string.Format("{0}", GetGPS(EDroneChartType.Latitude));
-                _Lon.text = string.Format("{0}", GetGPS(EDroneChartType.Longitude));
+                _Lat.text = string.Format("{0}", GetGPS(EDroneIoT.Latitude));
+                _Lon.text = string.Format("{0}", GetGPS(EDroneIoT.Longitude));
                                
             }
 
             if (!_IsTest && m_IsIMUReady)
             {
-                _XAcc.text = string.Format("{0,3}", m_ParserManager.GetParsingDataOf(EDroneChartType.Accelerometer_x));
-                _YAcc.text = string.Format("{0,3}", m_ParserManager.GetParsingDataOf(EDroneChartType.Accelerometer_y));
-                _ZAcc.text = string.Format("{0,3}", m_ParserManager.GetParsingDataOf(EDroneChartType.Accelerometer_z));
+                _XAcc.text = string.Format("{0,3}", m_DataModel.GetParsedDataOf(EDroneIoT.Accelerometer_x));
+                _YAcc.text = string.Format("{0,3}", m_DataModel.GetParsedDataOf(EDroneIoT.Accelerometer_y));
+                _ZAcc.text = string.Format("{0,3}", m_DataModel.GetParsedDataOf(EDroneIoT.Accelerometer_z));
                                               
-                _XGyr.text = string.Format("{0,3}", m_ParserManager.GetParsingDataOf(EDroneChartType.Gyroscope_x));
-                _YGyr.text = string.Format("{0,3}", m_ParserManager.GetParsingDataOf(EDroneChartType.Gyroscope_y));
-                _ZGyr.text = string.Format("{0,3}", m_ParserManager.GetParsingDataOf(EDroneChartType.Gyroscope_z));
-                                              
-                _XMag.text = string.Format("{0,3}", m_ParserManager.GetParsingDataOf(EDroneChartType.Magnetometer_x));
-                _YMag.text = string.Format("{0,3}", m_ParserManager.GetParsingDataOf(EDroneChartType.Magnetometer_y));
-                _ZMag.text = string.Format("{0,3}", m_ParserManager.GetParsingDataOf(EDroneChartType.Magnetometer_z));
+                _XGyr.text = string.Format("{0,3}", m_DataModel.GetParsedDataOf(EDroneIoT.Gyroscope_x));
+                _YGyr.text = string.Format("{0,3}", m_DataModel.GetParsedDataOf(EDroneIoT.Gyroscope_y));
+                _ZGyr.text = string.Format("{0,3}", m_DataModel.GetParsedDataOf(EDroneIoT.Gyroscope_z));
+                                                                
+                _XMag.text = string.Format("{0,3}", m_DataModel.GetParsedDataOf(EDroneIoT.Magnetometer_x));
+                _YMag.text = string.Format("{0,3}", m_DataModel.GetParsedDataOf(EDroneIoT.Magnetometer_y));
+                _ZMag.text = string.Format("{0,3}", m_DataModel.GetParsedDataOf(EDroneIoT.Magnetometer_z));
             }
 
             yield return new WaitForSeconds(_RefreshTime);
         }
     }
 
-    private string GetGPS(EDroneChartType chart)
+    private string GetGPS(EDroneIoT chart)
     {
-        var data = m_ParserManager.GetParsingDataOf(chart);
+        var data = m_DataModel.GetParsedDataOf(chart);
         string text = data.ToString("F0");  // no decimal
 
         string degree = "";
@@ -134,14 +134,14 @@ public class SidebarManager : MonoBehaviour
         string sec = "";
         string result = "";
 
-        if (chart == EDroneChartType.Latitude)
+        if (chart == EDroneIoT.Latitude)
         {
             degree = text.Substring(0, 2);
             min = text.Substring(3, 2);
             sec = text.Substring(4, 2);
             result = string.Format("{0:N3}˚{1}'{2}\"E", degree, min, sec);
         }
-        else if (chart == EDroneChartType.Longitude)
+        else if (chart == EDroneIoT.Longitude)
         {
             degree = text.Substring(0, 3);
             min = text.Substring(4, 2);

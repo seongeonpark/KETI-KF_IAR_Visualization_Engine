@@ -19,14 +19,14 @@ public class DroneAppManager : MonoBehaviour
 
     private DroneStatus m_Status;
     
-    private ParserManager m_ParserManager;
+    private Drone_Model m_ParserManager;
     private bool m_IsReady = false;
 
     private bool m_ChangedStatus = false;
 
     private void Awake()
     {
-        m_ParserManager = new ParserManager(_MQTT);
+        m_ParserManager = new Drone_Model(_MQTT);
     }
 
     void Update()
@@ -35,7 +35,7 @@ public class DroneAppManager : MonoBehaviour
         // #1. Check configuration
         if (!m_IsReady)
         {
-            m_IsReady = m_ParserManager.CheckConnection(EDroneChartType.Battery_remain);
+            m_IsReady = m_ParserManager.IsConnected(EDroneIoT.Battery_remain);
         }
         else if (m_IsReady)
         {

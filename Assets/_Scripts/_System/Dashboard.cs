@@ -21,7 +21,7 @@ public class Dashboard : MonoBehaviour
     private TextMeshProUGUI _mTxtMachine;
     private Transform _mRootObj;
 
-    private ParserManager m_ParserManager;
+    private Drone_Model m_ParserManager;
 
     private bool m_IsReady = false;
     private DroneStatus m_Status;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class VerticalScope : MonoBehaviour
 {
     #region Inspector_Window_Variables
-    [SerializeField] private EDroneChartType _ChartType;
+    [SerializeField] private EDroneIoT _ChartType;
 
     [Header("UI:")]
     [SerializeField] private RectTransform _Needle;
@@ -38,7 +38,7 @@ public class VerticalScope : MonoBehaviour
 
     private HTTP_Parser_v01 m_HTTP;
     private MQTT_Parser_v011 m_MQTT;
-    private ParserManager m_ParserManager;
+    private Drone_Model m_DataModel;
 
     private float m_ServerData = 0f;
     private float m_NeedleValue = 0f;
@@ -60,11 +60,11 @@ public class VerticalScope : MonoBehaviour
 
         if (m_HTTP)
         {
-            m_ParserManager = new ParserManager(m_HTTP);
+            m_DataModel = new Drone_Model(m_HTTP);
         }
         else if (m_MQTT)
         {
-            m_ParserManager = new ParserManager(m_MQTT);
+            m_DataModel = new Drone_Model(m_MQTT);
         }
     }
 
@@ -78,7 +78,7 @@ public class VerticalScope : MonoBehaviour
         // #1. Check configuration
         if (!m_IsReady)
         {
-            m_IsReady = m_ParserManager.CheckConnection(_ChartType);
+            m_IsReady = m_DataModel.IsConnected(_ChartType);
         }
 
         // #4. Animation
@@ -134,7 +134,7 @@ public class VerticalScope : MonoBehaviour
             }
             if (!_IsTest && m_IsReady)  // from SERVER
             {
-                m_ServerData = m_ParserManager.GetParsingDataOf(_ChartType);
+                m_ServerData = m_DataModel.GetParsedDataOf(_ChartType);
             }
 
             // #3. Pre-processing
